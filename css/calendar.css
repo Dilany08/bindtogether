@@ -1,0 +1,22 @@
+.container {
+    padding: 3rem;
+}
+.back-button {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    background-color: #7D0A0A;
+}
+.back-button:hover {
+    background-color: #c72d2d;
+}
+
+/* New CSS to make calendar lines black */
+.fc td, .fc th {
+    border-color: black !important;
+}
+
+.fc-day-grid-event, .fc-time-grid-event {
+    border: 1px solid black !important;
+}
+
