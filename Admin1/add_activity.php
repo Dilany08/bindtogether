@@ -174,7 +174,7 @@ $conn->close();
         <p>Event Time <span>*</span></p>
         <input type="time" name="Time" required class="box">
         <p>Media <span>*</span></p>
-        <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp" required>
+        <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp" required multiple>
         <div class="flex-btn">
             <input type="submit" value="Publish Event" name="publish" class="btn">
         </div>
