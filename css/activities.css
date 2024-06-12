@@ -1,0 +1,102 @@
+
+
+.container-one {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card-activity {
+    background-color: #f4f4f4;
+    border: #9a0000 solid 0.175rem;
+    border-radius: 0.5rem;
+    width: 350px;
+    height: 350px;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-activity:hover {
+    transform: scale(1.05);
+}
+
+.card-activity a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 15px;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-content h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.card-content img {
+    max-width: 250px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+}
+
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+#successDialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1000;
+}
+
+#successDialog p {
+    margin: 0 0 20px;
+}
+
+#successDialog button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#successDialog button:hover {
+    background: #0056b3;
+}
+
+
+
+
+

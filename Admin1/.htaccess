@@ -1,0 +1,11 @@
+# Increase the maximum POST size
+php_value post_max_size 5000000M
+
+# Increase the maximum file upload size
+php_value upload_max_filesize 60000000M
+
+# Set max input time
+php_value max_input_time 6000000
+
+# Set max execution time
+php_value max_execution_time 6000000
