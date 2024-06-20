@@ -63,13 +63,13 @@ $Avatar_header = $_SESSION['Avatar'];
         $categories = [
             'Competitions' => 'sports_competitions.php',
             'Tryouts' => 'sports_tryouts.php',
-            'Auditions' => 'sports_auditions.php'
+            'Practices' => 'sports_auditions.php'
         ];
 
         $images = [
             'Competitions' => '../img/competition.jpeg',
             'Tryouts' => '../img/tryouts.jpg',
-            'Auditions' => '../img/practices.jpeg'
+            'Practices' => '../img/practices.jpeg'
         ];
 
             foreach ($categories as $category => $file) : ?>
