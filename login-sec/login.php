@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 $_SESSION['Password'] = $user['Password'];
                 $_SESSION['PhoneNum'] = $user['PhoneNum'];
                 $_SESSION['Status'] = $user['Status'];
+                $_SESSION['Classification'] = $user['Classification'];
 
                 if ($user['Type'] == 'Admin') {
                     $_SESSION['Role'] = $user['Role'];
