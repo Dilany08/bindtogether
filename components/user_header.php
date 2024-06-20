@@ -17,7 +17,6 @@ $Avatar_header = $_SESSION['Avatar'];
 
     <ul class="navlist">
         <li><a href="../pages/frontpage.php">Home</a></li>
-        <li><a href="../feedback/contact.php">Contact Us</a></li>
         <li><a href="../activities/activities.php">Activities</a></li>
     </ul>
 
@@ -37,7 +36,7 @@ $Avatar_header = $_SESSION['Avatar'];
             <li class="profile-dropdown-list-item">
                 <a href="../pages/update.php">
                     <i class="fa-regular fa-user"></i>
-                    Update Profile
+                    Profile
                 </a>
             </li>
             <li class="profile-dropdown-list-item">
@@ -53,9 +52,9 @@ $Avatar_header = $_SESSION['Avatar'];
                 </a>
             </li>
             <li class="profile-dropdown-list-item">
-                <a href="#">
+                <a href="../feedback/contact.php">
                     <i class="fa-regular fa-file-alt"></i>
-                    Registration
+                    Give Feedback
                 </a>
             </li>
             <hr />

@@ -23,12 +23,18 @@ $Avatar = $_SESSION['Avatar'];
 
     <nav class="navbar">
         <a href="../Admin1/super_admin.php"><i class="fas fa-home"></i> <span>home</span></a>
-        <a href="../Admin1/add_posts.php"><i class="fas fa-pen"></i> <span>Add a Post</span></a>
-        <a href="../calendar/calendar.php"><i class="fas fa-eye"></i> <span>Schedule</span></a>
-        <a href="../login-sec/logout-user.php"><i class="fas fa-right-from-bracket"></i><span>logout</span></a>
+        <a href="../Admin1/update_profile.php"><i class="fa-regular fa-user"></i> <span>Update Profile</span></a>
+        <a href="../Admin1/posts.php"><i class="fa-regular fa-file-alt"></i> <span>Posts/Activities</span></a>
+        <a href="../Admin1/users_accounts.php"><i class="fa-solid fa-user-friends"></i> <span>User Accounts</span></a>
+        <a href="../Admin1/admin_accounts.php"><i class="fa-solid fa-user-edit"></i> <span>Admin Accounts</span></a>
+        <a href="../Admin1/comments.php"><i class="fa-regular fa-comments"></i> <span>Reported Comments</span></a>
+        <a href="#"><i class="fa-solid fa-bullhorn"></i> <span>Reported Posts</span></a>
+        <a href="../calendar/calendar.php"><i class="fa-regular fa-calendar"></i> <span>Calendar</span></a>
+        <a href="#"><i class="fa-solid fa-file-alt"></i> <span>Reports</span></a>
+        
     </nav>
 
     <div class="flex-btn">
-        <a href="../Admin1/super_admin.php" class="option-btn">Dashboard</a>
+    <a href="../login-sec/logout-user.php" class="option-btn"><i class="fas fa-right-from-bracket"></i><span>logout</span></a>
     </div>
 </header>

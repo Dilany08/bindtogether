@@ -28,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change-password'])) {
 
         // Check if the email belongs to a user or an admin
         if ($_SESSION['UserType'] == 'user') {
-            $stmt = $conn->prepare("UPDATE users SET Password = ?, Code = '' WHERE Email = ?");
+            $stmt = $conn->prepare("UPDATE users SET Password = ?, Code = 0 WHERE Email = ?");
         } elseif ($_SESSION['UserType'] == 'admin') {
-            $stmt = $conn->prepare("UPDATE admins SET Password = ?, Code = '' WHERE Email = ?");
+            $stmt = $conn->prepare("UPDATE admins SET Password = ?, Code = 0 WHERE Email = ?");
         } else {
             $errors['UserType'] = "Invalid user type.";
         }

@@ -20,7 +20,7 @@
         <a href="#" class="logo">Bataan Peninsula State University</a>
 
         <ul class="navlist">
-            <li><a href="homepage.html">Home</a></li>
+            <li><a href="homepage.php">Home</a></li>
             <li><a href="../login-sec/login.php">Contact Us</a></li>
             <li><a href="members.php">About Us</a></li>
         </ul>

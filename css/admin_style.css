@@ -313,12 +313,12 @@ input::-webkit-file-upload-button:hover {
 }
 
 .header .navbar {
-  padding: 1rem;
+  padding: .5rem;
 }
 
 .header .navbar a {
   display: block;
-  padding: 2rem 0;
+  padding: 1.2rem 0;
   font-size: 1.5rem;
   color: black;
   text-align: left;

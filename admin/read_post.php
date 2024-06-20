@@ -81,7 +81,7 @@ if (isset($_POST['delete_comment'])) {
 
     <?php require_once "../components/header_coach.php"; ?>
 
-    <a href="dashboard.php" class="btn btn-secondary back-button">
+    <a href="posts.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 

@@ -37,22 +37,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             if (password_verify($Password, $user['Password'])) {
                 // Set session variables common to both users and admins
                 $_SESSION['UserID'] = $user['UserID'];
-                $_SESSION['Fname'] = $user['Fname'];
                 $_SESSION['AdminID'] = $user['AdminID'];
-                $_SESSION['MediaURl'] = $user['MediaURl'];
-                $_SESSION['MediaType'] = $user['MediaType'];
+                $_SESSION['Fname'] = $user['Fname'];
                 $_SESSION['Mname'] = $user['Mname'];
                 $_SESSION['Lname'] = $user['Lname'];
                 $_SESSION['Avatar'] = $user['Avatar'];
                 $_SESSION['Email'] = $user['Email'];
-                $_SESSION['Password'] = $user['Password'];
                 $_SESSION['PhoneNum'] = $user['PhoneNum'];
                 $_SESSION['Status'] = $user['Status'];
                 $_SESSION['Classification'] = $user['Classification'];
+                $_SESSION['Password'] = $user['Password'];
+                $_SESSION['Role'] = $user['Role'];
 
                 if ($user['Type'] == 'Admin') {
                     $_SESSION['Role'] = $user['Role'];
-                    $_SESSION['AdminID'] = $user['UserID'];
+                    $_SESSION['Classification'] = $user['Classification'];
+                    $_SESSION['AdminID'] = $user['UserID']; 
 
                     if ($user['Role'] == "Coach in Sports" || $user['Role'] == "Coach in Performers and Artists" || $user['Role'] == "Student Athletes Officer" || $user['Role'] == "Student Performers Officer") {
                         header("Location: ../admin/dashboard.php");
@@ -99,9 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
         .back-button:hover {
             background-color: #f8f9fa;
-            /* Lighten background color on hover */
             color: #7D0A0A;
-            -webkit-transform: scale(1);
             transform: scale(1.1);
         }
 
