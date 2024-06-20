@@ -9,18 +9,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $Password = $_POST['Password'];
 
     $conn = getDBConnection();
-    // Fetch the columns that are common to both tables
-    $stmt = $conn->prepare(" SELECT 'Admin' AS Type, AdminID AS UserID, Fname, Mname, Lname, Avatar, Email, Password, PhoneNum, Status, Classification, Role, Active
-        FROM admins WHERE Email = ? UNION 
-        SELECT 'User' AS Type, UserID AS UserID, Fname, Mname, Lname, Avatar, Email, Password, PhoneNum, Status, Classification, Role, Active
-        FROM users 
-        WHERE Email = ?
-    ");
-    $stmt->bind_param("ss", $Email, $Email);
+
+    // First, check the admins table
+    $stmt = $conn->prepare("SELECT 'Admin' AS Type, AdminID AS UserID, Fname, Mname, Lname, Avatar, Email, Password, PhoneNum, Status, Classification, Role, Active FROM admins WHERE Email = ?");
+    $stmt->bind_param("s", $Email);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
     $stmt->close();
+
+    if (!$user) {
+        // If no result is found in the admins table, check the users table
+        $stmt = $conn->prepare("SELECT 'User' AS Type, UserID AS UserID, Fname, Mname, Lname, Avatar, Email, Password, PhoneNum, Status, Active FROM users WHERE Email = ?");
+        $stmt->bind_param("s", $Email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
+    }
+
     $conn->close();
 
     if ($user) {
@@ -28,11 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             $errors['Email'] = "Your account is no longer active. Please coordinate with your admin.";
         } else {
             if (password_verify($Password, $user['Password'])) {
-                // Set session variables
+                // Set session variables common to both users and admins
                 $_SESSION['UserID'] = $user['UserID'];
                 $_SESSION['Fname'] = $user['Fname'];
                 $_SESSION['AdminID'] = $user['AdminID'];
-                $_SESSION['Classification'] = $user['Classification'];
                 $_SESSION['MediaURl'] = $user['MediaURl'];
                 $_SESSION['MediaType'] = $user['MediaType'];
                 $_SESSION['Mname'] = $user['Mname'];
@@ -53,11 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                         header("Location: ../Admin1/super_admin.php");
                     } elseif ($user['Role'] == "SuperAdmin") {
                         header("Location: ../super_admin/super_admin.php");
-                    }else {
+                    } else {
                         $errors['Email'] = "Incorrect Email or Password.";
                     }
                 } else {
-                    $_SESSION['Classification'] = $user['Classification'];
                     header("Location: ../pages/frontpage.php");
                 }
                 exit();
