@@ -62,30 +62,32 @@ if (empty($Email)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Resend Verification Code</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
                 <h2 class="text-center">Resend Verification Code</h2>
-                <?php 
+                <?php
                 if (isset($_SESSION['info'])) {
-                    ?>
+                ?>
                     <div class="alert alert-success text-center">
                         <?php echo $_SESSION['info']; ?>
                     </div>
-                    <?php
+                <?php
                     unset($_SESSION['info']);
                 }
                 ?>
                 <?php
                 if (count($errors) > 0) {
-                    ?>
+                ?>
                     <div class="alert alert-danger text-center">
                         <?php
                         foreach ($errors as $showerror) {
@@ -93,11 +95,12 @@ if (empty($Email)) {
                         }
                         ?>
                     </div>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
         </div>
     </div>
 </body>
+
 </html>

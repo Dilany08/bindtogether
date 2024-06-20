@@ -9,14 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email = $_SESSION['Email'];
 
     $conn = getDBConnection();
-    
+
     // Check if the email belongs to a user or an admin
     $stmt_user = $conn->prepare("SELECT * FROM users WHERE Email = ? AND Code = ?");
     $stmt_user->bind_param("ss", $Email, $Code);
     $stmt_user->execute();
     $result_user = $stmt_user->get_result();
     $user = $result_user->fetch_assoc();
-    
+
     $stmt_admin = $conn->prepare("SELECT * FROM admins WHERE Email = ? AND Code = ?");
     $stmt_admin->bind_param("ss", $Email, $Code);
     $stmt_admin->execute();
@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Code Verification</title>
@@ -63,7 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .back-button:hover {
-            background-color: #f8f9fa; /* Lighten background color on hover */
+            background-color: #f8f9fa;
+            /* Lighten background color on hover */
             color: #7D0A0A;
             -webkit-transform: scale(1);
             transform: scale(1.1);
@@ -75,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
+
 <body>
     <!-- Back button -->
     <a href="forgot-password.php" class="btn back-button">
@@ -85,26 +88,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-4 offset-md-4 form">
                 <form action="reset-Code.php" method="POST" autocomplete="off">
                     <h2 class="text-center">Code Verification</h2>
-                    <?php 
-                    if(isset($_SESSION['info'])){
-                        ?>
+                    <?php
+                    if (isset($_SESSION['info'])) {
+                    ?>
                         <div class="alert alert-success text-center" style="padding: 0.4rem 0.4rem">
                             <?php echo $_SESSION['info']; ?>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <?php
-                    if(count($errors) > 0){
-                        ?>
+                    if (count($errors) > 0) {
+                    ?>
                         <div class="alert alert-danger text-center">
                             <?php
-                            foreach($errors as $showerror){
+                            foreach ($errors as $showerror) {
                                 echo $showerror;
                             }
                             ?>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <div class="form-group">
@@ -121,4 +124,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </body>
+
 </html>

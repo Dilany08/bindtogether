@@ -29,6 +29,7 @@ $result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,9 +39,10 @@ $result = $stmt->get_result();
     <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
 
     <style>
-        .btn{
+        .btn {
             margin-left: 5px;
         }
+
         .back-button {
             display: inline-block;
             width: 5rem;
@@ -60,65 +62,66 @@ $result = $stmt->get_result();
         }
     </style>
 </head>
-<body>
-<?php require_once "../components/user_header.php"; ?>
 
-<!-- Back button -->
-<a href="sports.php" class="btn btn-secondary back-button">
+<body>
+    <?php require_once "../components/user_header.php"; ?>
+
+    <!-- Back button -->
+    <a href="sports.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
     <section class="show-posts">
 
-<h1 class="heading">Activities</h1>
-<?php if (!empty($message)): ?>
-     <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
-<?php endif; ?>
-<div class="box-container">
+        <h1 class="heading">Activities</h1>
+        <?php if (!empty($message)) : ?>
+            <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
+        <?php endif; ?>
+        <div class="box-container">
 
-<?php if ($result->num_rows > 0) { ?>
-     <?php while ($fetch_activities = $result->fetch_assoc()) { 
-         // Convert time to 12-hour format with AM/PM
-         $activity_time = date("h:i A", strtotime($fetch_activities['Time']));
-     ?>
-         <form method="post" class="box">
-             <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>">
-             <input type="hidden" name="current_status" value="<?php echo htmlspecialchars($fetch_activities['Status']); ?>">
-             <?php if (!empty($fetch_activities['Image'])) { ?>
-                 <img src="../uploaded_media/<?php echo htmlspecialchars($fetch_activities['Image']); ?>" class="image" alt="">
-             <?php } ?>
-             <div class="title"><?php echo htmlspecialchars($fetch_activities['Title']); ?></div>
-             <div class="posts-Content" style="font-size: 14px;"><?php echo htmlspecialchars($fetch_activities['Content']); ?></div>
+            <?php if ($result->num_rows > 0) { ?>
+                <?php while ($fetch_activities = $result->fetch_assoc()) {
+                    // Convert time to 12-hour format with AM/PM
+                    $activity_time = date("h:i A", strtotime($fetch_activities['Time']));
+                ?>
+                    <form method="post" class="box">
+                        <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>">
+                        <input type="hidden" name="current_status" value="<?php echo htmlspecialchars($fetch_activities['Status']); ?>">
+                        <?php if (!empty($fetch_activities['Image'])) { ?>
+                            <img src="../uploaded_media/<?php echo htmlspecialchars($fetch_activities['Image']); ?>" class="image" alt="">
+                        <?php } ?>
+                        <div class="title"><?php echo htmlspecialchars($fetch_activities['Title']); ?></div>
+                        <div class="posts-Content" style="font-size: 14px;"><?php echo htmlspecialchars($fetch_activities['Content']); ?></div>
 
-             <div class="details" style="font-size: 12px;">
-                 <p><strong>Venue:</strong> <?php echo htmlspecialchars($fetch_activities['Venue']); ?></p>
-                 <p><strong>Address:</strong> <?php echo htmlspecialchars($fetch_activities['Address']); ?></p>
-                 <p><strong>Date:</strong> <?php echo htmlspecialchars($fetch_activities['Date']); ?></p>
-                 <p><strong>Time:</strong> <?php echo htmlspecialchars($activity_time); ?></p>
-                 <p><strong>Category:</strong> <?php echo htmlspecialchars($fetch_activities['Category']); ?></p>
-             </div>
-             <div class="flex-btn">
-                 <a href="tryouts.php?ActivityID=<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>" class="option-btn">Register</a>
-             </div>
-         </form>
-     <?php } ?>
- <?php } else { ?>
-     <p class="empty">No activities added yet!</p>
- <?php } ?>
+                        <div class="details" style="font-size: 12px;">
+                            <p><strong>Venue:</strong> <?php echo htmlspecialchars($fetch_activities['Venue']); ?></p>
+                            <p><strong>Address:</strong> <?php echo htmlspecialchars($fetch_activities['Address']); ?></p>
+                            <p><strong>Date:</strong> <?php echo htmlspecialchars($fetch_activities['Date']); ?></p>
+                            <p><strong>Time:</strong> <?php echo htmlspecialchars($activity_time); ?></p>
+                            <p><strong>Category:</strong> <?php echo htmlspecialchars($fetch_activities['Category']); ?></p>
+                        </div>
+                        <div class="flex-btn">
+                            <a href="tryouts.php?ActivityID=<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>" class="option-btn">Register</a>
+                        </div>
+                    </form>
+                <?php } ?>
+            <?php } else { ?>
+                <p class="empty">No activities added yet!</p>
+            <?php } ?>
 
- </div>
-</section>
+        </div>
+    </section>
 
-<script>
+    <script>
+        document.querySelectorAll('.register-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Registration functionality to be implemented.');
+            });
+        });
+    </script>
 
-document.querySelectorAll('.register-btn').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Registration functionality to be implemented.');
-    });
-});
-</script>
-
-<script src="../js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>

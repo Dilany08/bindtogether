@@ -10,22 +10,23 @@ $Avatar = $_SESSION['Avatar'];
 ?>
 
 <header class="header">
-        <a href="../super_admin/super_admin.php" class="logo">Admin<span>Panel</span></a>
+    <a href="../super_admin/super_admin.php" class="logo">SuperAdmin<span>Panel</span></a>
 
-        <div class="profile">
+    <div class="profile">
         <div class="profile-img">
-        <img src="../upload/<?php  echo htmlspecialchars($Avatar); ?>" alt="Profile Picture">
-        <i class="fa-solid fa-circle"></i> 
+            <img src="../upload/<?php echo htmlspecialchars($Avatar); ?>" alt="Profile Picture">
+            <i class="fa-solid fa-circle"></i>
         </div>
-        <p><span><?php echo htmlspecialchars($Fname); ?></span><p>
-        </div>
+        <p><span><?php echo htmlspecialchars($Fname); ?></span>
+        <p>
+    </div>
 
-        <nav class="navbar">
+    <nav class="navbar">
         <a href="../super_admin/super_admin.php"><i class="fas fa-home"></i> <span>home</span></a>
         <a href="../login-sec/logout-user.php"><i class="fas fa-right-from-bracket"></i><span>logout</span></a>
-        </nav>
+    </nav>
 
-        <div class="flex-btn">
+    <div class="flex-btn">
         <a href="../login-sec/signup-admin.php" class="option-btn">Register New Admin</a>
-        </div>
+    </div>
 </header>

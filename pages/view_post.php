@@ -101,6 +101,7 @@ if (isset($_POST['SubmitReport'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -111,6 +112,7 @@ if (isset($_POST['SubmitReport'])) {
         .btn {
             margin-left: 5px;
         }
+
         .back-button {
             display: inline-block;
             width: 5rem;
@@ -120,9 +122,11 @@ if (isset($_POST['SubmitReport'])) {
             cursor: pointer;
             text-align: left;
         }
+
         .back-button i {
             margin-right: 3px;
         }
+
         .back-button:hover {
             background-color: #c72d2d;
         }
@@ -159,7 +163,8 @@ if (isset($_POST['SubmitReport'])) {
             margin-bottom: 5px;
         }
 
-        #reportForm select, #reportForm textarea {
+        #reportForm select,
+        #reportForm textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -181,11 +186,12 @@ if (isset($_POST['SubmitReport'])) {
         }
     </style>
 </head>
+
 <body>
     <?php include '../components/user_header.php' ?> <!-- Include user header -->
 
-     <!-- Back button -->
-     <a href="frontpage.php" class="btn btn-secondary back-button">
+    <!-- Back button -->
+    <a href="frontpage.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
@@ -195,27 +201,27 @@ if (isset($_POST['SubmitReport'])) {
         $CommentID = $_POST['CommentID'];
     ?>
 
-    <section class="comment-edit-form">
-        <p>Edit your comment</p>
-        <?php
-        // Retrieve the comment to be edited
-        $select_edit_Comment = $conn->prepare("SELECT * FROM comments WHERE CommentID = ?");
-        $select_edit_Comment->bind_param("i", $CommentID);
-        $select_edit_Comment->execute();
-        $result = $select_edit_Comment->get_result();
-        if ($fetch_edit_comment = $result->fetch_assoc()) {
-            ?>
-            <form action="" method="POST">
-                <input type="hidden" name="edit_CommentID" value="<?= $CommentID; ?>">
-                <textarea name="Comment_edit_box" required cols="30" rows="10" placeholder="Write your comment..."><?= htmlspecialchars($fetch_edit_comment['Comment']); ?></textarea>
-                <input type="submit" class="inline-btn" name="edit_Comment">
-                <div class="inline-option-btn" onclick="window.location.href = 'view_post.php?PostID=<?= $get_id; ?>';">Cancel Edit</div>
-            </form>
+        <section class="comment-edit-form">
+            <p>Edit your comment</p>
             <?php
-        }
-        $select_edit_Comment->close();
-        ?>
-    </section>
+            // Retrieve the comment to be edited
+            $select_edit_Comment = $conn->prepare("SELECT * FROM comments WHERE CommentID = ?");
+            $select_edit_Comment->bind_param("i", $CommentID);
+            $select_edit_Comment->execute();
+            $result = $select_edit_Comment->get_result();
+            if ($fetch_edit_comment = $result->fetch_assoc()) {
+            ?>
+                <form action="" method="POST">
+                    <input type="hidden" name="edit_CommentID" value="<?= $CommentID; ?>">
+                    <textarea name="Comment_edit_box" required cols="30" rows="10" placeholder="Write your comment..."><?= htmlspecialchars($fetch_edit_comment['Comment']); ?></textarea>
+                    <input type="submit" class="inline-btn" name="edit_Comment">
+                    <div class="inline-option-btn" onclick="window.location.href = 'view_post.php?PostID=<?= $get_id; ?>';">Cancel Edit</div>
+                </form>
+            <?php
+            }
+            $select_edit_Comment->close();
+            ?>
+        </section>
     <?php
     }
     ?>
@@ -262,7 +268,7 @@ if (isset($_POST['SubmitReport'])) {
                     $confirm_likes->execute();
                     $result_confirm_likes = $confirm_likes->get_result();
                     $is_liked = $result_confirm_likes->fetch_assoc()['liked'] > 0;
-                    ?>
+            ?>
                     <form class="box" method="post">
                         <input type="hidden" name="PostID" value="<?= htmlspecialchars($PostID); ?>">
                         <input type="hidden" name="AdminID" value="<?= htmlspecialchars($fetch_posts['AdminID']); ?>">
@@ -279,18 +285,18 @@ if (isset($_POST['SubmitReport'])) {
                         if (!empty($fetch_posts['MediaURL'])) {
                             if ($fetch_posts['MediaType'] == 'image') {
                         ?>
-                        <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
-                        <?php
+                                <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
+                            <?php
                             } elseif ($fetch_posts['MediaType'] == 'video') {
-                        ?>
-                        <video controls class="post-image">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
-                            Your browser does not support the video tag.
-                        </video>
+                            ?>
+                                <video controls class="post-image">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
+                                    Your browser does not support the video tag.
+                                </video>
                         <?php
                             }
                         }
@@ -302,11 +308,13 @@ if (isset($_POST['SubmitReport'])) {
                         <div class="icons">
                             <div><i class="fas fa-comment"></i><span>(<?= htmlspecialchars($total_post_Comments); ?>)</span></div>
                             <button id="like" name="like_post" class="like">
-                                <i class="fas fa-heart" style="<?php if ($is_liked) { echo 'color: red;'; } ?>"></i><span>(<?= htmlspecialchars($total_post_likes); ?>)</span>
+                                <i class="fas fa-heart" style="<?php if ($is_liked) {
+                                                                    echo 'color: red;';
+                                                                } ?>"></i><span>(<?= htmlspecialchars($total_post_likes); ?>)</span>
                             </button>
                         </div>
                     </form>
-                    <?php
+            <?php
                 } else {
                     echo '<p class="empty">Post not found!</p>';
                 }
@@ -325,7 +333,7 @@ if (isset($_POST['SubmitReport'])) {
 
     <section class="comments-container">
         <p class="comment-title">Add comment</p>
-        <?php if ($UserID != '') {  
+        <?php if ($UserID != '') {
             $select_admin_id = $conn->prepare("SELECT posts.* FROM posts JOIN admins ON posts.AdminID = admins.AdminID 
                                         WHERE posts.PostID = ?");
             $select_admin_id->bind_param("i", $get_id);
@@ -333,25 +341,25 @@ if (isset($_POST['SubmitReport'])) {
             $result = $select_admin_id->get_result();
             $fetch_admin_id = $result->fetch_assoc();
         ?>
-        <form action="" method="post" class="add-comment">
-            <input type="hidden" name="admin_id" value="<?= htmlspecialchars($fetch_admin_id['AdminID']); ?>">
-            <input type="hidden" name="name" value="<?= htmlspecialchars($Fname_header . ' ' . $Lname_header); ?>">
-            <div class="post-admin">
-                <div class="profile-img">
-                    <img src="../upload/<?= htmlspecialchars($Avatar_header); ?>" alt="Profile Picture">
+            <form action="" method="post" class="add-comment">
+                <input type="hidden" name="admin_id" value="<?= htmlspecialchars($fetch_admin_id['AdminID']); ?>">
+                <input type="hidden" name="name" value="<?= htmlspecialchars($Fname_header . ' ' . $Lname_header); ?>">
+                <div class="post-admin">
+                    <div class="profile-img">
+                        <img src="../upload/<?= htmlspecialchars($Avatar_header); ?>" alt="Profile Picture">
+                    </div>
+                    <div class="user-name">
+                        <?= htmlspecialchars($Fname_header . ' ' . $Lname_header); ?>
+                    </div>
                 </div>
-                <div class="user-name">
-                    <?= htmlspecialchars($Fname_header . ' ' . $Lname_header); ?>
-                </div>
-            </div>
-            <textarea name="Comment" maxlength="1000" class="comment-box" cols="30" rows="10" placeholder="Write your comment.." required></textarea>
-            <input type="submit" value="Add Comment" class="inline-btn" name="add_Comment">
-        </form>
+                <textarea name="Comment" maxlength="1000" class="comment-box" cols="30" rows="10" placeholder="Write your comment.." required></textarea>
+                <input type="submit" value="Add Comment" class="inline-btn" name="add_Comment">
+            </form>
         <?php } ?>
 
         <p class="comment-title">Post comments</p>
         <div class="user-comments-container">
-        <?php
+            <?php
             $select_comments = $conn->prepare("SELECT comments.*, users.Fname, users.Lname, users.Avatar FROM comments JOIN users ON comments.UserID = users.UserID WHERE PostID = ? ORDER BY CommentID DESC");
             $select_comments->bind_param("i", $get_id);
             $select_comments->execute();
@@ -364,41 +372,45 @@ if (isset($_POST['SubmitReport'])) {
                     $comment_Date = $fetch_comments['Date'];
                     $comment_Avatar = $fetch_comments['Avatar'];
                     $name = $fetch_comments['Fname'] . ' ' . $fetch_comments['Lname'];
-        ?>
-            <div class="show-comments" style="<?php if($fetch_comments['UserID'] == $UserID){echo 'order:-1;'; } ?>">
-                
-                <div class="user-comments">
-                    <div class="profile-img">
-                         <img src="../upload/<?= htmlspecialchars($comment_Avatar); ?>" alt="Profile Picture">
+            ?>
+                    <div class="show-comments" style="<?php if ($fetch_comments['UserID'] == $UserID) {
+                                                            echo 'order:-1;';
+                                                        } ?>">
+
+                        <div class="user-comments">
+                            <div class="profile-img">
+                                <img src="../upload/<?= htmlspecialchars($comment_Avatar); ?>" alt="Profile Picture">
+                            </div>
+                            <div class="user-name">
+                                <?= htmlspecialchars($name); ?>
+                                <div class="date"><?= htmlspecialchars($comment_Date); ?></div>
+                            </div>
+                        </div>
+                        <div class="comment-box <?php if ($fetch_comments['UserID'] == $UserID) {
+                                                    echo 'user';
+                                                } ?>">
+                            <?= htmlspecialchars($comment_content); ?>
+
+                        </div>
+                        <?php if ($fetch_comments['UserID'] == $UserID) { ?>
+                            <form action="" method="POST">
+                                <input type="hidden" name="CommentID" value="<?= htmlspecialchars($fetch_comments['CommentID']); ?>">
+                                <button type="submit" class="inline-option-btn" name="open_edit_box">Edit Comment</button>
+                                <button type="submit" class="inline-delete-btn" name="delete_comment" onclick="return confirm('Delete this comment?');">Delete Comment</button>
+                            </form>
+                        <?php } else { ?>
+                            <form action="" method="POST">
+                                <input type="hidden" name="CommentID" value="<?= htmlspecialchars($fetch_comments['CommentID']); ?>">
+                                <button type="button" class="inline-option-btn" onclick="showReportDialog(<?= htmlspecialchars($fetch_comments['CommentID']); ?>)">Report</button>
+                            </form>
+                        <?php } ?>
                     </div>
-                    <div class="user-name">
-                        <?= htmlspecialchars($name); ?>
-                        <div class="date"><?= htmlspecialchars($comment_Date); ?></div>
-                    </div>
-                </div>
-                <div class="comment-box <?php if($fetch_comments['UserID'] == $UserID){echo 'user'; } ?>">
-                    <?= htmlspecialchars($comment_content); ?>
-                    
-                </div>
-                <?php if($fetch_comments['UserID'] == $UserID){ ?>
-                    <form action="" method="POST">
-                        <input type="hidden" name="CommentID" value="<?= htmlspecialchars($fetch_comments['CommentID']); ?>">
-                        <button type="submit" class="inline-option-btn" name="open_edit_box">Edit Comment</button>
-                        <button type="submit" class="inline-delete-btn" name="delete_comment" onclick="return confirm('Delete this comment?');">Delete Comment</button>
-                    </form>
-                <?php } else { ?>
-                    <form action="" method="POST">
-                        <input type="hidden" name="CommentID" value="<?= htmlspecialchars($fetch_comments['CommentID']); ?>">
-                        <button type="button" class="inline-option-btn" onclick="showReportDialog(<?= htmlspecialchars($fetch_comments['CommentID']); ?>)">Report</button>
-                    </form>
-                <?php } ?>
-            </div>
-        <?php
+            <?php
                 }
             } else {
                 echo '<p class="empty">No comments yet!</p>';
             }
-        ?>
+            ?>
         </div>
     </section>
 
@@ -423,40 +435,40 @@ if (isset($_POST['SubmitReport'])) {
     </div>
 
     <script>
-    function showReportDialog(CommentID) {
-        document.getElementById('reportCommentID').value = CommentID;
-        document.getElementById('reportOverlay').style.display = 'block';
-        document.getElementById('reportDialog').style.display = 'block';
-    }
-
-    document.getElementById('reportOverlay').onclick = function() {
-        document.getElementById('reportOverlay').style.display = 'none';
-        document.getElementById('reportDialog').style.display = 'none';
-    };
-
-    document.getElementById('ReportReason').onchange = function() {
-        const OtherReason = document.getElementById('OtherReason');
-        if (this.value === 'Other') {
-            OtherReason.disabled = false;
-        } else {
-            OtherReason.disabled = true;
-            OtherReason.value = '';
+        function showReportDialog(CommentID) {
+            document.getElementById('reportCommentID').value = CommentID;
+            document.getElementById('reportOverlay').style.display = 'block';
+            document.getElementById('reportDialog').style.display = 'block';
         }
-    };
 
-    document.getElementById('reportForm').onsubmit = function() {
-        const ReportReason = document.getElementById('ReportReason');
-        if (ReportReason.value === '') {
-            alert('Please select a reason for the report.');
-            return false;
-        }
-        const OtherReason = document.getElementById('OtherReason');
-        if (ReportReason.value === 'Other' && OtherReason.value.trim() === '') {
-            alert('Please provide a reason in the "Other Reason" field.');
-            return false;
-        }
-        return true;
-    };
+        document.getElementById('reportOverlay').onclick = function() {
+            document.getElementById('reportOverlay').style.display = 'none';
+            document.getElementById('reportDialog').style.display = 'none';
+        };
+
+        document.getElementById('ReportReason').onchange = function() {
+            const OtherReason = document.getElementById('OtherReason');
+            if (this.value === 'Other') {
+                OtherReason.disabled = false;
+            } else {
+                OtherReason.disabled = true;
+                OtherReason.value = '';
+            }
+        };
+
+        document.getElementById('reportForm').onsubmit = function() {
+            const ReportReason = document.getElementById('ReportReason');
+            if (ReportReason.value === '') {
+                alert('Please select a reason for the report.');
+                return false;
+            }
+            const OtherReason = document.getElementById('OtherReason');
+            if (ReportReason.value === 'Other' && OtherReason.value.trim() === '') {
+                alert('Please provide a reason in the "Other Reason" field.');
+                return false;
+            }
+            return true;
+        };
     </script>
 
     <?php $conn->close(); ?> <!-- Close the database connection -->
@@ -464,4 +476,5 @@ if (isset($_POST['SubmitReport'])) {
     <!-- custom js file link  -->
     <script src="../js/script.js"></script>
 </body>
+
 </html>

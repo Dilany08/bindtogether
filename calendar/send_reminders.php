@@ -2,7 +2,8 @@
 require_once '../login-sec/connection.php';
 
 // Function to send email
-function sendEmailReminder($email, $eventName, $eventDate, $eventTime) {
+function sendEmailReminder($email, $eventName, $eventDate, $eventTime)
+{
     $to = $email;
     $subject = "Event Reminder: $eventName";
     $message = "This is a reminder for the event '$eventName' scheduled on $eventDate at $eventTime.";
@@ -26,8 +27,8 @@ $query = "SELECT e.EventName, e.StartDate, e.StartTime, r.Email
 
 $result = mysqli_query($conn, $query);
 
-if(mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $eventName = $row['EventName'];
         $eventDate = $row['StartDate'];
         $eventTime = $row['StartTime'];
@@ -39,4 +40,3 @@ if(mysqli_num_rows($result) > 0) {
 }
 
 $conn->close();
-?>

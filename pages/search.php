@@ -17,64 +17,66 @@ $Date = Date('Y-m-d'); // Get current Date
 
 // Handle like post action
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
-   $PostID = $_POST['PostID'];
-   $UserID = $_SESSION['UserID']; // Assuming you have user ID in session
+    $PostID = $_POST['PostID'];
+    $UserID = $_SESSION['UserID']; // Assuming you have user ID in session
 
-   $conn = getDBConnection();
-   if (!$conn) {
-       die("Connection failed: " . mysqli_connect_error());
-   }
+    $conn = getDBConnection();
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
-   // Check if the user has already liked the post
-   $check_like = $conn->prepare("SELECT * FROM likes WHERE UserID = ? AND PostID = ?");
-   $check_like->bind_param("ii", $UserID, $PostID);
-   $check_like->execute();
-   $result_check_like = $check_like->get_result();
+    // Check if the user has already liked the post
+    $check_like = $conn->prepare("SELECT * FROM likes WHERE UserID = ? AND PostID = ?");
+    $check_like->bind_param("ii", $UserID, $PostID);
+    $check_like->execute();
+    $result_check_like = $check_like->get_result();
 
-   if ($result_check_like->num_rows > 0) {
-       // User has already liked the post, so unlike it
-       $unlike_post = $conn->prepare("DELETE FROM likes WHERE UserID = ? AND PostID = ?");
-       $unlike_post->bind_param("ii", $UserID, $PostID);
-       $unlike_post->execute();
-       $unlike_post->close();
-   } else {
-       // User has not liked the post yet, so like it
-       $like_post = $conn->prepare("INSERT INTO likes (UserID, PostID) VALUES (?, ?)");
-       $like_post->bind_param("ii", $UserID, $PostID);
-       $like_post->execute();
-       $like_post->close();
-   }
+    if ($result_check_like->num_rows > 0) {
+        // User has already liked the post, so unlike it
+        $unlike_post = $conn->prepare("DELETE FROM likes WHERE UserID = ? AND PostID = ?");
+        $unlike_post->bind_param("ii", $UserID, $PostID);
+        $unlike_post->execute();
+        $unlike_post->close();
+    } else {
+        // User has not liked the post yet, so like it
+        $like_post = $conn->prepare("INSERT INTO likes (UserID, PostID) VALUES (?, ?)");
+        $like_post->bind_param("ii", $UserID, $PostID);
+        $like_post->execute();
+        $like_post->close();
+    }
 
-   $check_like->close();
-   $conn->close();
+    $check_like->close();
+    $conn->close();
 
-   // Redirect to the same page to avoid form resubmission
-   header("Location: #like");
-   exit();
+    // Redirect to the same page to avoid form resubmission
+    header("Location: #like");
+    exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Search</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-   <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
 </head>
+
 <body>
-   <?php require_once "../components/user_header.php"; ?>
+    <?php require_once "../components/user_header.php"; ?>
 
-   <?php
-   if (isset($_POST['search_box']) || isset($_POST['search_btn'])) {
-       $conn = getDBConnection();
-       $search_box = $conn->real_escape_string($_POST['search_box']);
-       $search_param = "%{$search_box}%";
-       $Status = 'Active';
+    <?php
+    if (isset($_POST['search_box']) || isset($_POST['search_btn'])) {
+        $conn = getDBConnection();
+        $search_box = $conn->real_escape_string($_POST['search_box']);
+        $search_param = "%{$search_box}%";
+        $Status = 'Active';
 
-      // Join posts with admins table to get admin details
+        // Join posts with admins table to get admin details
         $select_posts = $conn->prepare("
             SELECT p.*, a.Fname, a.Lname, p.Avatar 
             FROM posts p
@@ -85,103 +87,104 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
         $select_posts->execute();
         $result = $select_posts->get_result();
 
-   ?>
+    ?>
 
-   <section class="posts-container">
-       <div class="box-container">
-           <?php
-           if ($result->num_rows > 0) {
-               while ($fetch_posts = $result->fetch_assoc()) {
-                   $PostID = $fetch_posts['PostID'];
-                   $AdminID = $fetch_posts['AdminID'];
+        <section class="posts-container">
+            <div class="box-container">
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($fetch_posts = $result->fetch_assoc()) {
+                        $PostID = $fetch_posts['PostID'];
+                        $AdminID = $fetch_posts['AdminID'];
 
-                   // Retrieve the count of comments for the post
-                   $count_post_comments = $conn->prepare("SELECT COUNT(*) AS total_comments FROM comments WHERE PostID = ?");
-                   $count_post_comments->bind_param("i", $PostID);
-                   $count_post_comments->execute();
-                   $result_post_comments = $count_post_comments->get_result();
-                   $total_post_comments = $result_post_comments->fetch_assoc()['total_comments'];
+                        // Retrieve the count of comments for the post
+                        $count_post_comments = $conn->prepare("SELECT COUNT(*) AS total_comments FROM comments WHERE PostID = ?");
+                        $count_post_comments->bind_param("i", $PostID);
+                        $count_post_comments->execute();
+                        $result_post_comments = $count_post_comments->get_result();
+                        $total_post_comments = $result_post_comments->fetch_assoc()['total_comments'];
 
-                   // Retrieve the count of likes for the post
-                   $count_post_likes = $conn->prepare("SELECT COUNT(*) AS total_likes FROM likes WHERE PostID = ?");
-                   $count_post_likes->bind_param("i", $PostID);
-                   $count_post_likes->execute();
-                   $result_post_likes = $count_post_likes->get_result();
-                   $total_post_likes = $result_post_likes->fetch_assoc()['total_likes'];
+                        // Retrieve the count of likes for the post
+                        $count_post_likes = $conn->prepare("SELECT COUNT(*) AS total_likes FROM likes WHERE PostID = ?");
+                        $count_post_likes->bind_param("i", $PostID);
+                        $count_post_likes->execute();
+                        $result_post_likes = $count_post_likes->get_result();
+                        $total_post_likes = $result_post_likes->fetch_assoc()['total_likes'];
 
-                   // Check if the current user has liked the post
-                   $UserID = $_SESSION['UserID']; // Assuming you have user ID in session
-                   $confirm_likes = $conn->prepare("SELECT COUNT(*) AS liked FROM likes WHERE UserID = ? AND PostID = ?");
-                   $confirm_likes->bind_param("ii", $UserID, $PostID);
-                   $confirm_likes->execute();
-                   $result_confirm_likes = $confirm_likes->get_result();
-                   $is_liked = $result_confirm_likes->fetch_assoc()['liked'] > 0;
-           ?>
-                   <form class="box" method="post">
-                       <input type="hidden" name="PostID" value="<?= htmlspecialchars($PostID); ?>">
-                       <input type="hidden" name="AdminID" value="<?= htmlspecialchars($AdminID); ?>">
-                       <div class="post-admin">
-                           <div class="profile-img">
-                               <img src="../upload/<?= htmlspecialchars($fetch_posts['Avatar']); ?>" alt="Profile">
-                           </div>
-                           <div>
-                               <a href="admin_posts.php?AdminID=<?= urlencode($fetch_posts['AdminID']); ?>"><?= htmlspecialchars($fetch_posts['Fname'] . ' ' . $fetch_posts['Lname']); ?></a>
-                               <div><?= htmlspecialchars($fetch_posts['Date']); ?></div>
-                           </div>
-                       </div>
-                       <?php
-                       if (!empty($fetch_posts['MediaURL'])) {
-                           if ($fetch_posts['MediaType'] == 'image') {
-                       ?>
-                       <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
-                       <?php
-                           } elseif ($fetch_posts['MediaType'] == 'video') {
-                       ?>
-                       <video controls class="post-image">
-                           <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
-                           <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
-                           <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
-                           <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
-                           <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
-                           Your browser does not support the video tag.
-                       </video>
-                       <?php
-                           }
-                       }
-                       ?>
-                       <div class="post-title"><?= htmlspecialchars($fetch_posts['Title']); ?></div>
-                       <div class="post-content content-150"><?= htmlspecialchars($fetch_posts['Content']); ?></div>
-                       <a href="view_post.php?PostID=<?= htmlspecialchars($PostID); ?>" class="inline-btn">read more</a>
-                       <a href="category.php?Category=<?= htmlspecialchars($fetch_posts['Category']); ?>" class="post-cat"><i class="fas fa-tag"></i> <span><?= htmlspecialchars($fetch_posts['Category']); ?></span></a>
-                       <div class="icons">
-                           <a href="view_post.php?PostID=<?= htmlspecialchars($PostID); ?>"><i class="fas fa-comment"></i><span>(<?= htmlspecialchars($total_post_comments); ?>)</span></a>
-                           <button id="like" name="like_post" class="like"><i class="fas fa-heart" style="<?= $is_liked ? 'color: red;' : ''; ?>"></i><span>(<?= htmlspecialchars($total_post_likes); ?>)</span></button>
-                       </div>
-                   </form>
-           <?php
-               }
-           } else {
-               echo '<p class="empty">No result found!</p>';
-           }
+                        // Check if the current user has liked the post
+                        $UserID = $_SESSION['UserID']; // Assuming you have user ID in session
+                        $confirm_likes = $conn->prepare("SELECT COUNT(*) AS liked FROM likes WHERE UserID = ? AND PostID = ?");
+                        $confirm_likes->bind_param("ii", $UserID, $PostID);
+                        $confirm_likes->execute();
+                        $result_confirm_likes = $confirm_likes->get_result();
+                        $is_liked = $result_confirm_likes->fetch_assoc()['liked'] > 0;
+                ?>
+                        <form class="box" method="post">
+                            <input type="hidden" name="PostID" value="<?= htmlspecialchars($PostID); ?>">
+                            <input type="hidden" name="AdminID" value="<?= htmlspecialchars($AdminID); ?>">
+                            <div class="post-admin">
+                                <div class="profile-img">
+                                    <img src="../upload/<?= htmlspecialchars($fetch_posts['Avatar']); ?>" alt="Profile">
+                                </div>
+                                <div>
+                                    <a href="admin_posts.php?AdminID=<?= urlencode($fetch_posts['AdminID']); ?>"><?= htmlspecialchars($fetch_posts['Fname'] . ' ' . $fetch_posts['Lname']); ?></a>
+                                    <div><?= htmlspecialchars($fetch_posts['Date']); ?></div>
+                                </div>
+                            </div>
+                            <?php
+                            if (!empty($fetch_posts['MediaURL'])) {
+                                if ($fetch_posts['MediaType'] == 'image') {
+                            ?>
+                                    <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
+                                <?php
+                                } elseif ($fetch_posts['MediaType'] == 'video') {
+                                ?>
+                                    <video controls class="post-image">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
+                                        Your browser does not support the video tag.
+                                    </video>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <div class="post-title"><?= htmlspecialchars($fetch_posts['Title']); ?></div>
+                            <div class="post-content content-150"><?= htmlspecialchars($fetch_posts['Content']); ?></div>
+                            <a href="view_post.php?PostID=<?= htmlspecialchars($PostID); ?>" class="inline-btn">read more</a>
+                            <a href="category.php?Category=<?= htmlspecialchars($fetch_posts['Category']); ?>" class="post-cat"><i class="fas fa-tag"></i> <span><?= htmlspecialchars($fetch_posts['Category']); ?></span></a>
+                            <div class="icons">
+                                <a href="view_post.php?PostID=<?= htmlspecialchars($PostID); ?>"><i class="fas fa-comment"></i><span>(<?= htmlspecialchars($total_post_comments); ?>)</span></a>
+                                <button id="like" name="like_post" class="like"><i class="fas fa-heart" style="<?= $is_liked ? 'color: red;' : ''; ?>"></i><span>(<?= htmlspecialchars($total_post_likes); ?>)</span></button>
+                            </div>
+                        </form>
+                <?php
+                    }
+                } else {
+                    echo '<p class="empty">No result found!</p>';
+                }
 
-           // Close the prepared statements
-           $select_posts->close();
-           if (isset($count_post_comments)) $count_post_comments->close();
-           if (isset($count_post_likes)) $count_post_likes->close();
-           if (isset($confirm_likes)) $confirm_likes->close();
+                // Close the prepared statements
+                $select_posts->close();
+                if (isset($count_post_comments)) $count_post_comments->close();
+                if (isset($count_post_likes)) $count_post_likes->close();
+                if (isset($confirm_likes)) $confirm_likes->close();
 
-           // Close the database connection
-           $conn->close();
-           ?>
-       </div>
-   </section>
+                // Close the database connection
+                $conn->close();
+                ?>
+            </div>
+        </section>
 
-   <?php
-   }
-   ?>
+    <?php
+    }
+    ?>
 
-   <!-- custom js file link  -->
-   <script src="../js/script.js"></script>
+    <!-- custom js file link  -->
+    <script src="../js/script.js"></script>
 
 </body>
+
 </html>

@@ -125,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" Content="IE=edge">
@@ -133,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="../css/admin_style.css">
     <Style>
-            .back-button {
+        .back-button {
             display: inline-block;
             width: 7rem;
             padding: 8px 10px;
@@ -152,115 +153,117 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </Style>
 </head>
+
 <body>
 
-<?php require_once "../components/header_coach.php"; ?>
+    <?php require_once "../components/header_coach.php"; ?>
 
-<a href="view_posts.php" class="btn btn-secondary back-button">
-    <i class="fa-solid fa-arrow-left"></i> Back
-</a>
+    <a href="view_posts.php" class="btn btn-secondary back-button">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
 
-<section class="post-editor">
-    <h1 class="heading">Edit Post</h1>
+    <section class="post-editor">
+        <h1 class="heading">Edit Post</h1>
 
-    <?php
-    $conn = getDBConnection();
-
-    if (isset($_GET['PostID'])) {
-        $PostID = $_GET['PostID'];
-        $select_posts = $conn->prepare("SELECT * FROM posts WHERE PostID = ?");
-        $select_posts->bind_param("i", $PostID);
-        $select_posts->execute();
-        $result = $select_posts->get_result();
-
-        if ($result->num_rows > 0) {
-            while ($fetch_posts = $result->fetch_assoc()) {
-    ?>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="old_MediaURL" value="<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>">
-        <input type="hidden" name="PostID" value="<?php echo htmlspecialchars($fetch_posts['PostID']); ?>">
-        <?php if (!empty($message)): ?>
-      <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
-   <?php endif; ?>
-        <p>Post Status <span>*</span></p>
-        <select name="Status" class="box" required>
-            <option value="<?php echo htmlspecialchars($fetch_posts['Status']); ?>" selected><?php echo htmlspecialchars($fetch_posts['Status']); ?></option>
-            <option value="active">Active</option>
-            <option value="deactive">Deactive</option>
-        </select>
-        <p>Post Title <span>*</span></p>
-        <input type="text" name="Title" maxlength="100" required placeholder="Add post Title" class="box" value="<?php echo htmlspecialchars($fetch_posts['Title']); ?>">
-        <p>Post Content <span>*</span></p>
-        <textarea name="Content" class="box" required maxlength="10000" placeholder="Write your Content..." cols="30" rows="10"><?php echo htmlspecialchars($fetch_posts['Content']); ?></textarea>
-        <p>Post Category <span>*</span></p>
-          <?php  if ($result->num_rows > 0) {
-        // Fetch current post category
-        $current_category = htmlspecialchars($fetch_posts['Category']);
-        ?>
-        <select name="Category" class="box" required>
-            <option value="<?php echo $current_category; ?>" selected><?php echo $current_category; ?></option>
-            <?php
-            // Generate options from fetched categories
-            while($row = $result->fetch_assoc()) {
-                $category_id = htmlspecialchars($row['CategoryID']);
-                $category_name = htmlspecialchars($row['Category']);
-                echo "<option value='$category_id'>$category_name</option>";
-            }
-            ?>
-        </select>
         <?php
-    } else {
-        echo "No categories available.";
-    }   ?>  
-        <p>Media Type <span>*</span></p>
-        <select name="MediaType" class="box" required>
-            <option value="<?php echo htmlspecialchars($fetch_posts['MediaType']); ?>" selected><?php echo htmlspecialchars($fetch_posts['MediaType']); ?></option>
-            <option value="image">Image</option>
-            <option value="video">Video</option>
-            <option value="text">Text</option>
-        </select>
-        <p>Media</p>
-        <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp, video/mp4, video/webm, video/ogg, video/MOV">
-        <?php if ($fetch_posts['MediaURL'] != '') { ?>
-            <p>Current Media:</p>
-            <?php if ($fetch_posts['MediaType'] == 'image') { ?>
-                <img src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" class="image" alt="">
-            <?php } elseif ($fetch_posts['MediaType'] == 'video') { ?>
-                <video controls class="image">
-                            <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
-                            <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
-                            <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
-                            <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
-                            <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
-                            Your browser does not support the video tag.
-                        </video>
-            <?php } ?>
-            <input type="submit" value="Delete Media" class="inline-delete-btn" name="delete_media">
-        <?php } ?>
-        <div class="flex-btn">
-            <input type="submit" value="Save Post" name="save" class="btn">
-            <a href="view_posts.php" class="option-btn">Go Back</a>
-            <input type="submit" value="Delete Post" class="delete-btn" name="delete_post">
-        </div>
-    </form>
-    <?php
-            }
-        } else {
-            echo '<p class="empty">No posts found!</p>';
-    ?>
-    <div class="flex-btn">
-        <a href="view_posts.php" class="option-btn">View Posts</a>
-        <a href="add_posts.php" class="option-btn">Add Posts</a>
-    </div>
-    <?php
-        }
-        $select_posts->close();
-    }
-    $conn->close();
-    ?>
-</section>
+        $conn = getDBConnection();
 
-<script src="../js/admin_script.js"></script>
+        if (isset($_GET['PostID'])) {
+            $PostID = $_GET['PostID'];
+            $select_posts = $conn->prepare("SELECT * FROM posts WHERE PostID = ?");
+            $select_posts->bind_param("i", $PostID);
+            $select_posts->execute();
+            $result = $select_posts->get_result();
+
+            if ($result->num_rows > 0) {
+                while ($fetch_posts = $result->fetch_assoc()) {
+        ?>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="old_MediaURL" value="<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>">
+                        <input type="hidden" name="PostID" value="<?php echo htmlspecialchars($fetch_posts['PostID']); ?>">
+                        <?php if (!empty($message)) : ?>
+                            <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
+                        <?php endif; ?>
+                        <p>Post Status <span>*</span></p>
+                        <select name="Status" class="box" required>
+                            <option value="<?php echo htmlspecialchars($fetch_posts['Status']); ?>" selected><?php echo htmlspecialchars($fetch_posts['Status']); ?></option>
+                            <option value="active">Active</option>
+                            <option value="deactive">Deactive</option>
+                        </select>
+                        <p>Post Title <span>*</span></p>
+                        <input type="text" name="Title" maxlength="100" required placeholder="Add post Title" class="box" value="<?php echo htmlspecialchars($fetch_posts['Title']); ?>">
+                        <p>Post Content <span>*</span></p>
+                        <textarea name="Content" class="box" required maxlength="10000" placeholder="Write your Content..." cols="30" rows="10"><?php echo htmlspecialchars($fetch_posts['Content']); ?></textarea>
+                        <p>Post Category <span>*</span></p>
+                        <?php if ($result->num_rows > 0) {
+                            // Fetch current post category
+                            $current_category = htmlspecialchars($fetch_posts['Category']);
+                        ?>
+                            <select name="Category" class="box" required>
+                                <option value="<?php echo $current_category; ?>" selected><?php echo $current_category; ?></option>
+                                <?php
+                                // Generate options from fetched categories
+                                while ($row = $result->fetch_assoc()) {
+                                    $category_id = htmlspecialchars($row['CategoryID']);
+                                    $category_name = htmlspecialchars($row['Category']);
+                                    echo "<option value='$category_id'>$category_name</option>";
+                                }
+                                ?>
+                            </select>
+                        <?php
+                        } else {
+                            echo "No categories available.";
+                        }   ?>
+                        <p>Media Type <span>*</span></p>
+                        <select name="MediaType" class="box" required>
+                            <option value="<?php echo htmlspecialchars($fetch_posts['MediaType']); ?>" selected><?php echo htmlspecialchars($fetch_posts['MediaType']); ?></option>
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                            <option value="text">Text</option>
+                        </select>
+                        <p>Media</p>
+                        <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp, video/mp4, video/webm, video/ogg, video/MOV">
+                        <?php if ($fetch_posts['MediaURL'] != '') { ?>
+                            <p>Current Media:</p>
+                            <?php if ($fetch_posts['MediaType'] == 'image') { ?>
+                                <img src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" class="image" alt="">
+                            <?php } elseif ($fetch_posts['MediaType'] == 'video') { ?>
+                                <video controls class="image">
+                                    <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
+                                    <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
+                                    <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
+                                    <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
+                                    <source src="../uploaded_media/<?php echo htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
+                                    Your browser does not support the video tag.
+                                </video>
+                            <?php } ?>
+                            <input type="submit" value="Delete Media" class="inline-delete-btn" name="delete_media">
+                        <?php } ?>
+                        <div class="flex-btn">
+                            <input type="submit" value="Save Post" name="save" class="btn">
+                            <a href="view_posts.php" class="option-btn">Go Back</a>
+                            <input type="submit" value="Delete Post" class="delete-btn" name="delete_post">
+                        </div>
+                    </form>
+                <?php
+                }
+            } else {
+                echo '<p class="empty">No posts found!</p>';
+                ?>
+                <div class="flex-btn">
+                    <a href="view_posts.php" class="option-btn">View Posts</a>
+                    <a href="add_posts.php" class="option-btn">Add Posts</a>
+                </div>
+        <?php
+            }
+            $select_posts->close();
+        }
+        $conn->close();
+        ?>
+    </section>
+
+    <script src="../js/admin_script.js"></script>
 
 </body>
+
 </html>

@@ -74,14 +74,16 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Home</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-   <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
 </head>
+
 <body>
     <?php require_once "../components/user_header.php"; ?>
 
@@ -141,7 +143,7 @@ $result = $conn->query($sql);
                     if ($result_authors->num_rows > 0) {
                         while ($fetch_authors = $result_authors->fetch_assoc()) {
                     ?>
-                    <a href="admin_posts.php?AdminID=<?= htmlspecialchars($fetch_authors['AdminID']); ?>" class="links"><?= htmlspecialchars($fetch_authors['name']); ?></a>
+                            <a href="admin_posts.php?AdminID=<?= htmlspecialchars($fetch_authors['AdminID']); ?>" class="links"><?= htmlspecialchars($fetch_authors['name']); ?></a>
                     <?php
                         }
                     } else {
@@ -213,18 +215,18 @@ $result = $conn->query($sql);
                         if (!empty($fetch_posts['MediaURL'])) {
                             if ($fetch_posts['MediaType'] == 'image') {
                         ?>
-                        <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
-                        <?php
+                                <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
+                            <?php
                             } elseif ($fetch_posts['MediaType'] == 'video') {
-                        ?>
-                        <video controls class="post-image">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
-                            <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
-                            Your browser does not support the video tag.
-                        </video>
+                            ?>
+                                <video controls class="post-image">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
+                                    <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
+                                    Your browser does not support the video tag.
+                                </video>
                         <?php
                             }
                         }
@@ -259,8 +261,9 @@ $result = $conn->query($sql);
         </div>
     </section>
 
-<!-- custom js file link  -->
-<script src="../js/script.js"></script>
+    <!-- custom js file link  -->
+    <script src="../js/script.js"></script>
 
 </body>
+
 </html>

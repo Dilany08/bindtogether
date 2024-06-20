@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login Form</title>
@@ -97,7 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         }
 
         .back-button:hover {
-            background-color: #f8f9fa; /* Lighten background color on hover */
+            background-color: #f8f9fa;
+            /* Lighten background color on hover */
             color: #7D0A0A;
             -webkit-transform: scale(1);
             transform: scale(1.1);
@@ -108,46 +110,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         }
     </style>
 </head>
-<body>
-<!-- Back button -->
-<a href="../pages/homepage.php" class="btn back-button">
-    <i class="fas fa-arrow-left"></i> Back
-</a>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 offset-md-4 form login-form">
-            <form action="login.php" method="POST" enctype="multipart/form-data" autocomplete="on">
-                <h2 class="text-center">Login Now!</h2>
-                <p class="text-center">Login with your Email and Password.</p>
-                <?php
-                    if(count($errors) > 0){
-                        ?>
+<body>
+    <!-- Back button -->
+    <a href="../pages/homepage.php" class="btn back-button">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 form login-form">
+                <form action="login.php" method="POST" enctype="multipart/form-data" autocomplete="on">
+                    <h2 class="text-center">Login Now!</h2>
+                    <p class="text-center">Login with your Email and Password.</p>
+                    <?php
+                    if (count($errors) > 0) {
+                    ?>
                         <div class="alert alert-danger text-center">
                             <?php
-                            foreach($errors as $showerror){
+                            foreach ($errors as $showerror) {
                                 echo $showerror;
                             }
                             ?>
                         </div>
-                        <?php
+                    <?php
                     }
-                ?>
-                <div class="form-group">
-                    <input class="form-control" type="Email" name="Email" placeholder="Email Address" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="Password" name="Password" oninput="this.value = this.value.replace(/\s/g, '')" placeholder="Password" required>
-                </div>
-                <div class="link forget-pass text-left"><a href="forgot-password.php">Forgot Password?</a></div>
-                <div class="form-group">
-                    <input class="form-control button" type="submit" name="login" value="Login">
-                </div>
-                <div class="link login-link text-center">Don't have an account? <a href="signup.php">Signup now</a></div>
-            </form>
+                    ?>
+                    <div class="form-group">
+                        <input class="form-control" type="Email" name="Email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="Password" name="Password" oninput="this.value = this.value.replace(/\s/g, '')" placeholder="Password" required>
+                    </div>
+                    <div class="link forget-pass text-left"><a href="forgot-password.php">Forgot Password?</a></div>
+                    <div class="form-group">
+                        <input class="form-control button" type="submit" name="login" value="Login">
+                    </div>
+                    <div class="link login-link text-center">Don't have an account? <a href="signup.php">Signup now</a></div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>
