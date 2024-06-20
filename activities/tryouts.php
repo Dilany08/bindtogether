@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-weight: bold;
         }
 
-        .form-group input, .form-group select {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: .4rem;
             border: 1px solid #ccc;
@@ -213,195 +215,196 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             flex: 1 1 45%;
             margin-bottom: 0.5rem;
         }
-
     </style>
 </head>
+
 <body>
-<?php require_once "../components/user_header.php"; ?>
-<!-- Back button -->
-<a href="sports_tryouts.php" class="btn btn-secondary back-button">
-    <i class="fa-solid fa-arrow-left"></i> Back
-</a>
-<h2>Register Now!</h2>
+    <?php require_once "../components/user_header.php"; ?>
+    <!-- Back button -->
+    <a href="sports_tryouts.php" class="btn btn-secondary back-button">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
+    <h2>Register Now!</h2>
 
-<div class="form-container">
-    <form id="tryouts" action="tryouts.php" method="POST">
-        <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($ActivityID); ?>">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="studNum">Student Number:</label>
-            <input type="text" id="studNum" name="studNum" required>
-        </div>
-
-        <div class="form-group">
-            <label for="contactNum">Contact Number:</label>
-            <input type="text" id="contactNum" name="contactNum" required>
-        </div>
-
-        <div class="form-group">
-            <label for="yearLevel">Year Level:</label>
-            <select id="yearLevel" name="yearLevel" required>
-                <option hidden>Year Level</option>
-                <option value="First Year">First Year</option>
-                <option value="Second Year">Second Year</option>
-                <option value="Third Year">Third Year</option>
-                <option value="Fourth Year">Fourth Year</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="program">Program:</label>
-            <select id="program" name="program" required>
-                <option hidden>Program</option>
-                <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in Hospitality Management</option>
-                <option value="Bachelor of Science in Tourism Management">Bachelor of Science in Tourism Management</option>
-                <option value="Bachelor of Science in Developmental Communication">Bachelor of Science in Developmental Communication</option>
-                <option value="Bachelor of Arts in Communication">Bachelor of Arts in Communication</option>
-                <option value="Bachelor of Science in Mechanical Engineering">Bachelor of Science in Mechanical Engineering</option>
-                <option value="Bachelor of Science in Railway Engineering">Bachelor of Science in Railway Engineering</option>
-                <option value="Bachelor of Science in Industrial Engineering">Bachelor of Science in Industrial Engineering</option>
-                <option value="Bachelor of Science in Electronics Engineering">Bachelor of Science in Electronics Engineering</option>
-                <option value="Bachelor of Science in Electrical Engineering">Bachelor of Science in Electrical Engineering</option>
-                <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering</option>
-                <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering</option>
-                <option value="Bachelor of Science in Architecture">Bachelor of Science in Architecture</option>
-                <option value="Bachelor of Science in Industrial Technology">Bachelor of Science in Industrial Technology</option>
-                <option value="Bachelor of Technical - Vocational Teacher Education">Bachelor of Technical - Vocational Teacher Education</option>
-                <option value="Bachelor of Science in Computer Science">Bachelor of Science in Computer Science</option>
-                <option value="Bachelor of Science in Data Science">Bachelor of Science in Data Science</option>
-                <option value="Bachelor of Science in Entertainment and Multimedia Computing">Bachelor of Science in Entertainment and Multimedia Computing</option>
-                <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-                <option value="Bachelor of Science in Midwifery">Bachelor of Science in Midwifery</option>
-                <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
-                <option value="Bachelor of Science in Public Health">Bachelor of Science in Public Health</option>
-                <option value="Others:">Others:</option>
-            </select>
-            <input type="text" id="otherProgramField" name="otherProgram" placeholder="Please specify your program">
-        </div>
-
-        <div class="form-group">
-            <label for="college">College:</label>
-            <input type="text" id="college" name="college" required>
-        </div>
-
-        <div class="form-group">
-            <label>Gender:</label>
-            <div class="gender-container">
-                <label><input type="radio" name="gender" value="Male" required> Male</label>
-                <label><input type="radio" name="gender" value="Female" required> Female</label>
-                <label><input type="radio" name="gender" value="LGBTQIA+" required> LGBTQIA+</label>
-                <label><input type="radio" name="gender" value="Prefer not to say" required> Prefer not to say</label>
+    <div class="form-container">
+        <form id="tryouts" action="tryouts.php" method="POST">
+            <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($ActivityID); ?>">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required>
-        </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
 
-        <div class="form-group">
-            <label for="fatherName">Father's Name:</label>
-            <input type="text" id="fatherName" name="fatherName" required>
-        </div>
+            <div class="form-group">
+                <label for="studNum">Student Number:</label>
+                <input type="text" id="studNum" name="studNum" required>
+            </div>
 
-        <div class="form-group">
-            <label for="motherName">Mother's Name:</label>
-            <input type="text" id="motherName" name="motherName" required>
-        </div>
+            <div class="form-group">
+                <label for="contactNum">Contact Number:</label>
+                <input type="text" id="contactNum" name="contactNum" required>
+            </div>
 
-        <div class="form-group">
-            <label for="parentContactNum">Parent's Contact Number:</label>
-            <input type="text" id="parentContactNum" name="parentContactNum" required>
-        </div>
+            <div class="form-group">
+                <label for="yearLevel">Year Level:</label>
+                <select id="yearLevel" name="yearLevel" required>
+                    <option hidden>Year Level</option>
+                    <option value="First Year">First Year</option>
+                    <option value="Second Year">Second Year</option>
+                    <option value="Third Year">Third Year</option>
+                    <option value="Fourth Year">Fourth Year</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required>
-        </div>
+            <div class="form-group">
+                <label for="program">Program:</label>
+                <select id="program" name="program" required>
+                    <option hidden>Program</option>
+                    <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in Hospitality Management</option>
+                    <option value="Bachelor of Science in Tourism Management">Bachelor of Science in Tourism Management</option>
+                    <option value="Bachelor of Science in Developmental Communication">Bachelor of Science in Developmental Communication</option>
+                    <option value="Bachelor of Arts in Communication">Bachelor of Arts in Communication</option>
+                    <option value="Bachelor of Science in Mechanical Engineering">Bachelor of Science in Mechanical Engineering</option>
+                    <option value="Bachelor of Science in Railway Engineering">Bachelor of Science in Railway Engineering</option>
+                    <option value="Bachelor of Science in Industrial Engineering">Bachelor of Science in Industrial Engineering</option>
+                    <option value="Bachelor of Science in Electronics Engineering">Bachelor of Science in Electronics Engineering</option>
+                    <option value="Bachelor of Science in Electrical Engineering">Bachelor of Science in Electrical Engineering</option>
+                    <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering</option>
+                    <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering</option>
+                    <option value="Bachelor of Science in Architecture">Bachelor of Science in Architecture</option>
+                    <option value="Bachelor of Science in Industrial Technology">Bachelor of Science in Industrial Technology</option>
+                    <option value="Bachelor of Technical - Vocational Teacher Education">Bachelor of Technical - Vocational Teacher Education</option>
+                    <option value="Bachelor of Science in Computer Science">Bachelor of Science in Computer Science</option>
+                    <option value="Bachelor of Science in Data Science">Bachelor of Science in Data Science</option>
+                    <option value="Bachelor of Science in Entertainment and Multimedia Computing">Bachelor of Science in Entertainment and Multimedia Computing</option>
+                    <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                    <option value="Bachelor of Science in Midwifery">Bachelor of Science in Midwifery</option>
+                    <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
+                    <option value="Bachelor of Science in Public Health">Bachelor of Science in Public Health</option>
+                    <option value="Others:">Others:</option>
+                </select>
+                <input type="text" id="otherProgramField" name="otherProgram" placeholder="Please specify your program">
+            </div>
 
-        <div class="form-group">
-            <label for="height">Height (cm):</label>
-            <input type="text" id="height" name="height" required>
-        </div>
+            <div class="form-group">
+                <label for="college">College:</label>
+                <input type="text" id="college" name="college" required>
+            </div>
 
-        <div class="form-group">
-            <label for="weight">Weight (kg):</label>
-            <input type="text" id="weight" name="weight" required>
-        </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="gender-container">
+                    <label><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label><input type="radio" name="gender" value="Female" required> Female</label>
+                    <label><input type="radio" name="gender" value="LGBTQIA+" required> LGBTQIA+</label>
+                    <label><input type="radio" name="gender" value="Prefer not to say" required> Prefer not to say</label>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
-</div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('tryouts');
-    const programSelect = document.getElementById('program');
-    const otherProgramField = document.getElementById('otherProgramField');
+            <div class="form-group">
+                <label for="fatherName">Father's Name:</label>
+                <input type="text" id="fatherName" name="fatherName" required>
+            </div>
 
-    programSelect.addEventListener('change', function() {
-        if (programSelect.value === 'Others:') {
-            otherProgramField.style.display = 'block';
-            otherProgramField.required = true;
-        } else {
-            otherProgramField.style.display = 'none';
-            otherProgramField.required = false;
-        }
-    });
+            <div class="form-group">
+                <label for="motherName">Mother's Name:</label>
+                <input type="text" id="motherName" name="motherName" required>
+            </div>
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+            <div class="form-group">
+                <label for="parentContactNum">Parent's Contact Number:</label>
+                <input type="text" id="parentContactNum" name="parentContactNum" required>
+            </div>
 
-        const formData = new FormData(form);
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
 
-        fetch('tryouts.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(response => {
-            if (response.trim() === 'success') {
-                document.getElementById('overlay').style.display = 'block';
-                document.getElementById('successDialog').style.display = 'block';
-            } else {
-                alert(response); // Display the server's error message
-            }
-        })
-        .catch(() => {
-            alert('There was an error connecting to the server. Please try again.');
+            <div class="form-group">
+                <label for="height">Height (cm):</label>
+                <input type="text" id="height" name="height" required>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="text" id="weight" name="weight" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('tryouts');
+            const programSelect = document.getElementById('program');
+            const otherProgramField = document.getElementById('otherProgramField');
+
+            programSelect.addEventListener('change', function() {
+                if (programSelect.value === 'Others:') {
+                    otherProgramField.style.display = 'block';
+                    otherProgramField.required = true;
+                } else {
+                    otherProgramField.style.display = 'none';
+                    otherProgramField.required = false;
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+
+                fetch('tryouts.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(response => {
+                        if (response.trim() === 'success') {
+                            document.getElementById('overlay').style.display = 'block';
+                            document.getElementById('successDialog').style.display = 'block';
+                        } else {
+                            alert(response); // Display the server's error message
+                        }
+                    })
+                    .catch(() => {
+                        alert('There was an error connecting to the server. Please try again.');
+                    });
+            });
+
+            document.getElementById('overlay').addEventListener('click', function() {
+                this.style.display = 'none';
+                document.getElementById('successDialog').style.display = 'none';
+                location.reload(); // Reload the page
+            });
+
+            document.getElementById('closeDialog').addEventListener('click', function() {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('successDialog').style.display = 'none';
+                location.reload(); // Reload the page
+            });
         });
-    });
+    </script>
 
-    document.getElementById('overlay').addEventListener('click', function() {
-        this.style.display = 'none';
-        document.getElementById('successDialog').style.display = 'none';
-        location.reload(); // Reload the page
-    });
-
-    document.getElementById('closeDialog').addEventListener('click', function() {
-        document.getElementById('overlay').style.display = 'none';
-        document.getElementById('successDialog').style.display = 'none';
-        location.reload(); // Reload the page
-    });
-});
-</script>
-
-<div id="overlay"></div>
-<div id="successDialog">
-    <p>Successfully registered!</p>
-    <button id="closeDialog">Close</button>
-</div>
+    <div id="overlay"></div>
+    <div id="successDialog">
+        <p>Successfully registered!</p>
+        <button id="closeDialog">Close</button>
+    </div>
 
 </body>
+
 </html>

@@ -107,11 +107,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/signup.css"/>
+    <link rel="stylesheet" href="../css/signup.css" />
     <style>
         .back-button {
             position: absolute;
@@ -124,7 +125,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
         }
 
         .back-button:hover {
-            background-color: #f8f9fa; /* Lighten background color on hover */
+            background-color: #f8f9fa;
+            /* Lighten background color on hover */
             color: #7D0A0A;
             -webkit-transform: scale(1);
             transform: scale(1.1);
@@ -135,182 +137,183 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
         }
     </style>
 </head>
+
 <body>
 
-<a href="javascript:history.back()" class="btn back-button">
-    <i class="fas fa-arrow-left"></i> Back
-</a>
+    <a href="javascript:history.back()" class="btn back-button">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
 
-<section class="container">
-    <h2>Sign Up Now!</h2>
-    <form action="signup-admin.php" class="form" method="post" enctype="multipart/form-data" autocomplete="" onsubmit="return validateForm()">
-        <?php 
-        if (count($errors) > 0) {
-            echo '<div class="alert alert-danger text-center">';
-            foreach ($errors as $error) {
-                echo $error . '<br>';
+    <section class="container">
+        <h2>Sign Up Now!</h2>
+        <form action="signup-admin.php" class="form" method="post" enctype="multipart/form-data" autocomplete="" onsubmit="return validateForm()">
+            <?php
+            if (count($errors) > 0) {
+                echo '<div class="alert alert-danger text-center">';
+                foreach ($errors as $error) {
+                    echo $error . '<br>';
+                }
+                echo '</div>';
             }
-            echo '</div>';
-        }
-        ?>
+            ?>
 
-        <div class="column">
-            <div class="input-box">
-                <label> First Name: </label>
-                <input type="text" name="Fname" id="Fname" placeholder="First Name" required>
-            </div>
-            <div class="input-box">
-                <label>Middle Name: </label>
-                <input type="text" name="Mname" id="Mname" placeholder="Middle Name">
-            </div>
-            <div class="input-box">
-                <label> Last Name: </label>
-                <input type="text" name="Lname" id="Lname" placeholder="Last Name" required>
-            </div>
-        </div>           
-
-        <div class="column">
-            <div class="input-box">
-                <label> Birth Date: </label>
-                <input type="date" name="BirthDate" placeholder="mm/dd/yy" required>
-            </div> 
-            <div class="input-box">
-                <label> Phone Number: </label>
-                <input type="text" name="PhoneNum" placeholder="000-0000-0000" required>
-            </div>
-
-            <div class="select-role">
-                <label> Role: </label>
-                <select name="Role" id="Role" onchange="toggleClassification()" required>    
-                    <option hidden>Role</option>
-                    <option>Student Athletes Officer</option>
-                    <option>Student Performers Officer</option>
-                    <option>Coach in Sports</option>
-                    <option>Coach in Performers</option>
-                    <option>Sports Director</option>
-                    <option>Performers and Artists Director</option>
-                    <option>SuperAdmin</option>
-                </select>
-            </div>
-        </div>         
-       
-        <div class="column">
-            <div class="input-box">
-                <label> E-mail Address: </label>
-                <input type="text" name="Email" placeholder="@bpsu.edu.ph" required>
-            </div>
-            
-            <div class="select-role">
-                <label> Classification: </label>
-                <select name="Classification" id="Classification" required>    
-                    <option hidden>Classification</option>
-                </select>
-            </div>
-        </div>
-    
-        <div class="gender-box">
-            <div class="gender-option">
-                <h3> Gender: </h3>
-                <div class="Gender">
-                    <input type="radio" name="Gender" value="Male" required> Male
-                    <input type="radio" name="Gender" value="Female" required> Female
-                    <input type="radio" name="Gender" value="other" required> Prefer not to say
+            <div class="column">
+                <div class="input-box">
+                    <label> First Name: </label>
+                    <input type="text" name="Fname" id="Fname" placeholder="First Name" required>
+                </div>
+                <div class="input-box">
+                    <label>Middle Name: </label>
+                    <input type="text" name="Mname" id="Mname" placeholder="Middle Name">
+                </div>
+                <div class="input-box">
+                    <label> Last Name: </label>
+                    <input type="text" name="Lname" id="Lname" placeholder="Last Name" required>
                 </div>
             </div>
-        </div>
 
-        <div class="column">
-            <div class="select-role">
-                <label>Campus: </label>
-                <select name="Campus" required>
-                    <option hidden>Campus</option>
-                    <option>Main Campus</option>
-                    <option>Balanga Campus</option>
-                    <option>Abucay Campus</option>
-                    <option>Orani Campus</option>
-                </select>
-            </div>
-            <div class="profile">
-                <label>Upload Picture: </label>
-                <input type="file" name="Avatar">
-            </div>
-        </div>
+            <div class="column">
+                <div class="input-box">
+                    <label> Birth Date: </label>
+                    <input type="date" name="BirthDate" placeholder="mm/dd/yy" required>
+                </div>
+                <div class="input-box">
+                    <label> Phone Number: </label>
+                    <input type="text" name="PhoneNum" placeholder="000-0000-0000" required>
+                </div>
 
-        <div class="column">
-            <div class="input-box">
-                <h3> Password: </h3>
-                <input type="Password" name="Password" id="Password" placeholder="Enter your Password" required>
+                <div class="select-role">
+                    <label> Role: </label>
+                    <select name="Role" id="Role" onchange="toggleClassification()" required>
+                        <option hidden>Role</option>
+                        <option>Student Athletes Officer</option>
+                        <option>Student Performers Officer</option>
+                        <option>Coach in Sports</option>
+                        <option>Coach in Performers</option>
+                        <option>Sports Director</option>
+                        <option>Performers and Artists Director</option>
+                        <option>SuperAdmin</option>
+                    </select>
+                </div>
             </div>
-            <div class="input-box">
-                <h3> Confirm Password: </h3>
-                <input type="Password" name="CPassword" id="CPassword" placeholder="Confirm Password" required>
-            </div> 
-        </div> 
-       
-        <input class="button" type="submit" name="signup" value="Signup">
-        <div class="link">Already have an account? <a href="login.php">Login here</a></div>
-    </form>
-</section>
 
-<script>
-    function validateForm() {
-        var Mname = document.getElementById("Mname").value;
-        if (Mname.trim() === "") {
-            var confirmNoMiddleName = confirm("You have not entered a middle name. Do you confirm that you do not have a middle name?");
-            if (!confirmNoMiddleName) {
+            <div class="column">
+                <div class="input-box">
+                    <label> E-mail Address: </label>
+                    <input type="text" name="Email" placeholder="@bpsu.edu.ph" required>
+                </div>
+
+                <div class="select-role">
+                    <label> Classification: </label>
+                    <select name="Classification" id="Classification" required>
+                        <option hidden>Classification</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="gender-box">
+                <div class="gender-option">
+                    <h3> Gender: </h3>
+                    <div class="Gender">
+                        <input type="radio" name="Gender" value="Male" required> Male
+                        <input type="radio" name="Gender" value="Female" required> Female
+                        <input type="radio" name="Gender" value="other" required> Prefer not to say
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="select-role">
+                    <label>Campus: </label>
+                    <select name="Campus" required>
+                        <option hidden>Campus</option>
+                        <option>Main Campus</option>
+                        <option>Balanga Campus</option>
+                        <option>Abucay Campus</option>
+                        <option>Orani Campus</option>
+                    </select>
+                </div>
+                <div class="profile">
+                    <label>Upload Picture: </label>
+                    <input type="file" name="Avatar">
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <h3> Password: </h3>
+                    <input type="Password" name="Password" id="Password" placeholder="Enter your Password" required>
+                </div>
+                <div class="input-box">
+                    <h3> Confirm Password: </h3>
+                    <input type="Password" name="CPassword" id="CPassword" placeholder="Confirm Password" required>
+                </div>
+            </div>
+
+            <input class="button" type="submit" name="signup" value="Signup">
+            <div class="link">Already have an account? <a href="login.php">Login here</a></div>
+        </form>
+    </section>
+
+    <script>
+        function validateForm() {
+            var Mname = document.getElementById("Mname").value;
+            if (Mname.trim() === "") {
+                var confirmNoMiddleName = confirm("You have not entered a middle name. Do you confirm that you do not have a middle name?");
+                if (!confirmNoMiddleName) {
+                    return false;
+                }
+            }
+
+            var Password = document.getElementById("Password").value;
+            var CPassword = document.getElementById("CPassword").value;
+
+            if (Password !== CPassword) {
+                alert("Passwords do not match.");
                 return false;
             }
+            return true;
         }
 
-        var Password = document.getElementById("Password").value;
-        var CPassword = document.getElementById("CPassword").value;
+        function toggleClassification() {
+            var Role = document.getElementById("Role").value;
+            var classification = document.getElementById("Classification");
 
-        if (Password !== CPassword) {
-            alert("Passwords do not match.");
-            return false;
+            var athleteOptions = [
+                "Basketball", "Sepak Takraw", "Volleyball", "Table Tennis", "Badminton",
+                "Darts", "Arnis", "Chess", "Swimming", "Javelin Throw", "Taekwondo",
+                "Shot put", "Athletics"
+            ];
+            var performerOptions = [
+                "Dancing", "Singing", "Choir", "Dance Sports", "Acting"
+            ];
+
+            classification.innerHTML = ''; // Clear existing options
+
+            if (Role === "Student Athletes Officer" || Role === "Coach in Sports") {
+                athleteOptions.forEach(function(option) {
+                    var opt = document.createElement("option");
+                    opt.value = option;
+                    opt.innerHTML = option;
+                    classification.appendChild(opt);
+                });
+            } else if (Role === "Student Performers Officer" || Role === "Coach in Performers") {
+                performerOptions.forEach(function(option) {
+                    var opt = document.createElement("option");
+                    opt.value = option;
+                    opt.innerHTML = option;
+                    classification.appendChild(opt);
+                });
+            } else if (Role === "Sports Director" || Role === "Performers and Artists Director" || Role === "SuperAdmin") {
+                classification.disabled = true;
+                classification.removeAttribute('required');
+            } else {
+                classification.disabled = false;
+                classification.setAttribute('required', 'required');
+            }
         }
-        return true;
-    }
-
-    function toggleClassification() {
-        var Role = document.getElementById("Role").value;
-        var classification = document.getElementById("Classification");
-
-        var athleteOptions = [
-            "Basketball", "Sepak Takraw", "Volleyball", "Table Tennis", "Badminton", 
-            "Darts", "Arnis", "Chess", "Swimming", "Javelin Throw", "Taekwondo", 
-            "Shot put", "Athletics"
-        ];
-        var performerOptions = [
-            "Dancing", "Singing", "Choir", "Dance Sports", "Acting"
-        ];
-
-        classification.innerHTML = ''; // Clear existing options
-        
-        if (Role === "Student Athletes Officer" || Role === "Coach in Sports") {
-            athleteOptions.forEach(function(option) {
-                var opt = document.createElement("option");
-                opt.value = option;
-                opt.innerHTML = option;
-                classification.appendChild(opt);
-            });
-        } else if (Role === "Student Performers Officer" || Role === "Coach in Performers") {
-            performerOptions.forEach(function(option) {
-                var opt = document.createElement("option");
-                opt.value = option;
-                opt.innerHTML = option;
-                classification.appendChild(opt);
-            });
-        } else if (Role === "Sports Director" || Role === "Performers and Artists Director" || Role === "SuperAdmin") {
-            classification.disabled = true;
-            classification.removeAttribute('required');
-        } else {
-            classification.disabled = false;
-            classification.setAttribute('required', 'required');
-        }
-    }
-</script>
+    </script>
 
 </body>
-</html>
 
+</html>

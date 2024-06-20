@@ -53,12 +53,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change-password'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Create a New Password</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -66,16 +68,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change-password'])) {
                 <form action="reset-password.php" method="POST" autocomplete="off">
                     <h2 class="text-center">New Password</h2>
                     <?php
-                    if(count($errors) > 0){
-                        ?>
+                    if (count($errors) > 0) {
+                    ?>
                         <div class="alert alert-danger text-center">
                             <?php
-                            foreach($errors as $showerror){
+                            foreach ($errors as $showerror) {
                                 echo $showerror;
                             }
                             ?>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <div class="form-group">
@@ -91,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change-password'])) {
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>

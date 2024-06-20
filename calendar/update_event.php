@@ -21,4 +21,3 @@ if (mysqli_query($conn, $update_query)) {
 
 echo json_encode($response);
 $conn->close();
-?>

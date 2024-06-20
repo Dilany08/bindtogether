@@ -10,25 +10,26 @@ $Avatar = $_SESSION['Avatar'];
 ?>
 
 <header class="header">
-        <a href="../superAdmin/super_admin.php" class="logo">Admin<span>Panel</span></a>
+    <a href="../superAdmin/super_admin.php" class="logo">Admin<span>Panel</span></a>
 
-        <div class="profile">
+    <div class="profile">
         <div class="profile-img">
-        <img src="../upload/<?php  echo htmlspecialchars($Avatar); ?>" alt="Profile Picture">
-        <i class="fa-solid fa-circle"></i> 
+            <img src="../upload/<?php echo htmlspecialchars($Avatar); ?>" alt="Profile Picture">
+            <i class="fa-solid fa-circle"></i>
         </div>
-        <p><span><?php echo htmlspecialchars($Fname); ?></span><p>
-        </div>
+        <p><span><?php echo htmlspecialchars($Fname); ?></span>
+        <p>
+    </div>
 
-        <nav class="navbar">
+    <nav class="navbar">
         <a href="../superAdmin/super_admin.php"><i class="fas fa-home"></i> <span>home</span></a>
         <a href="../superAdmin/add_posts.php"><i class="fas fa-pen"></i> <span>Add a Post</span></a>
         <a href="../calendar/calendar.php"><i class="fas fa-eye"></i> <span>Schedule</span></a>
         <a href="admin_accounts.php"><i class="fas fa-user"></i> <span>Accounts</span></a>
         <a href="../login-sec/logout-user.php"><i class="fas fa-right-from-bracket"></i><span>logout</span></a>
-        </nav>
+    </nav>
 
-        <div class="flex-btn">
+    <div class="flex-btn">
         <a href="../login-sec/signup-admin.php" class="option-btn">Register New Admin</a>
-        </div>
+    </div>
 </header>

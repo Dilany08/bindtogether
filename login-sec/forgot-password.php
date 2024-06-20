@@ -15,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
 
     if (empty($errors)) {
         $conn = getDBConnection();
-        
+
         // Prepare and execute query to check if the Email exists in users table
         $stmt = $conn->prepare("SELECT * FROM users WHERE Email = ?");
         $stmt->bind_param("s", $Email);
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
-        
+
         if ($user) {
             $table = "users";
         } else {
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
 
         if (empty($errors)) {
             $Code = rand(100000, 999999); // Generate a 6-digit Code
-            
+
             // Prepare and execute query to update the Code in the appropriate table
             $stmt = $conn->prepare("UPDATE $table SET Code = ? WHERE Email = ?");
             $stmt->bind_param("ss", $Code, $Email);
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
                 $subject = "Password Reset Code";
                 $message = "Your password reset Code is: $Code";
                 $sender = "From: bpsu.bindtogether@gmail.com";
-                
+
                 // Send the Email with the reset Code
                 if (mail($Email, $subject, $message, $sender)) {
                     $_SESSION['info'] = "We've sent a password reset Code to your Email - $Email";
@@ -74,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Forgot Password</title>
@@ -92,7 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
         }
 
         .back-button:hover {
-            background-color: #f8f9fa; /* Lighten background color on hover */
+            background-color: #f8f9fa;
+            /* Lighten background color on hover */
             color: #7D0A0A;
             -webkit-transform: scale(1);
             transform: scale(1.1);
@@ -103,12 +105,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
         }
     </style>
 </head>
+
 <body>
 
-<!-- Back button -->
-<a href="login.php" class="btn back-button">
-    <i class="fas fa-arrow-left"></i> Back
-</a>
+    <!-- Back button -->
+    <a href="login.php" class="btn back-button">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
 
     <div class="container">
         <div class="row">
@@ -116,19 +119,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
                 <form action="forgot-password.php" method="POST" autocomplete="">
                     <h2 class="text-center">Forgot Password</h2>
                     <p class="text-center">Enter your Email address</p>
-                    <?php 
+                    <?php
                     ?>
                     <?php
-                    if(count($errors) > 0){
-                        ?>
+                    if (count($errors) > 0) {
+                    ?>
                         <div class="alert alert-danger text-center">
                             <?php
-                            foreach($errors as $showerror){
+                            foreach ($errors as $showerror) {
                                 echo $showerror;
                             }
                             ?>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <div class="form-group">
@@ -141,6 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check-Email'])) {
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>

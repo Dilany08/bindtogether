@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../login-sec/connection.php';
 session_start();
 
@@ -28,12 +28,13 @@ $conn = getDBConnection();
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+   die("Connection failed: " . $conn->connect_error);
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" Content="IE=edge">
@@ -47,61 +48,63 @@ if ($conn->connect_error) {
    <link rel="stylesheet" href="../css/admin_style.css">
 
 </head>
+
 <body>
 
-<?php require_once "../components/headerSuperAdmin.php"; ?>
+   <?php require_once "../components/headerSuperAdmin.php"; ?>
 
-<div id="menu-btn" class="fas fa-bars"></div>
+   <div id="menu-btn" class="fas fa-bars"></div>
 
-<!-- admin dashboard section starts  -->
+   <!-- admin dashboard section starts  -->
 
-<section class="dashboard">
+   <section class="dashboard">
 
-   <h1 class="heading">Bataan Peninsula State University</h1>
+      <h1 class="heading">Bataan Peninsula State University</h1>
 
-   <div class="box-container">
+      <div class="box-container">
 
-   <!-- boxes -->
-   <div class="box">
-      <h3>Welcome!</h3>
-      <p><?php echo htmlspecialchars($Fname); ?></p>
-         <a href="update_profile.php" class="btn">Update Profile</a>
-      </div>
+         <!-- boxes -->
+         <div class="box">
+            <h3>Welcome!</h3>
+            <p><?php echo htmlspecialchars($Fname); ?></p>
+            <a href="update_profile.php" class="btn">Update Profile</a>
+         </div>
 
-      <?php
+         <?php
 
-      // Fetch number of users
-      $select_athlete_performer_artist = $conn->prepare("SELECT * FROM users");
-      $select_athlete_performer_artist->execute();
-      $numbers_of_athlete_performer_artist = $select_athlete_performer_artist->get_result()->num_rows;
-      $select_athlete_performer_artist->close();
+         // Fetch number of users
+         $select_athlete_performer_artist = $conn->prepare("SELECT * FROM users");
+         $select_athlete_performer_artist->execute();
+         $numbers_of_athlete_performer_artist = $select_athlete_performer_artist->get_result()->num_rows;
+         $select_athlete_performer_artist->close();
 
-      // Fetch number of admins
-      $select_coach_professor_officer = $conn->prepare("SELECT * FROM admins");
-      $select_coach_professor_officer->execute();
-      $numbers_of_coach_professor_officer = $select_coach_professor_officer->get_result()->num_rows;
-      $select_coach_professor_officer->close();
+         // Fetch number of admins
+         $select_coach_professor_officer = $conn->prepare("SELECT * FROM admins");
+         $select_coach_professor_officer->execute();
+         $numbers_of_coach_professor_officer = $select_coach_professor_officer->get_result()->num_rows;
+         $select_coach_professor_officer->close();
 
-      ?>
+         ?>
 
-      <div class="box">
-         <h3><?php echo htmlspecialchars($numbers_of_athlete_performer_artist); ?></h3>
-         <p>User Accounts</p>
-         <a href="users_accounts.php" class="btn">See Users</a>
-      </div>
+         <div class="box">
+            <h3><?php echo htmlspecialchars($numbers_of_athlete_performer_artist); ?></h3>
+            <p>User Accounts</p>
+            <a href="users_accounts.php" class="btn">See Users</a>
+         </div>
 
-      <div class="box">
-         <h3><?php echo htmlspecialchars($numbers_of_coach_professor_officer); ?></h3>
-         <p>Admin/Coach Accounts</p>
-         <a href="admin_accounts.php" class="btn">See Admins</a>
-      </div>
+         <div class="box">
+            <h3><?php echo htmlspecialchars($numbers_of_coach_professor_officer); ?></h3>
+            <p>Admin/Coach Accounts</p>
+            <a href="admin_accounts.php" class="btn">See Admins</a>
+         </div>
 
-</section>
+   </section>
 
-<!-- admin dashboard section ends -->
+   <!-- admin dashboard section ends -->
 
-<!-- custom js file link  -->
-<script src="../js/admin_script.js"></script>
+   <!-- custom js file link  -->
+   <script src="../js/admin_script.js"></script>
 
 </body>
+
 </html>

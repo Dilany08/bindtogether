@@ -68,6 +68,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,7 +88,8 @@ $conn->close();
             background-color: #ffff;
         }
 
-        .category-management h4, .category-management h2 {
+        .category-management h4,
+        .category-management h2 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -135,7 +137,7 @@ $conn->close();
         .category-management ul li form {
             margin: 0;
             display: inline;
-            
+
         }
 
         .category-management ul li form input[type="submit"] {
@@ -164,7 +166,7 @@ $conn->close();
             color: white;
         }
 
-            .back-button {
+        .back-button {
             display: inline-block;
             width: 7rem;
             padding: 8px 10px;
@@ -183,37 +185,39 @@ $conn->close();
         }
     </style>
 </head>
+
 <body>
-<?php require_once "../components/header.php"; ?>
-<a href="super_admin.php" class="btn btn-secondary back-button">
+    <?php require_once "../components/header.php"; ?>
+    <a href="super_admin.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
-<section class="category-management">
-    <h4 class="heading">Manage Categories</h4>
-    <?php if (!empty($message)): ?>
-        <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
-    <?php endif; ?>
-    
-    <form action="" method="post">
-        <h5>Add New Category</h5>
-        <input type="text" name="category_name" maxlength="100" required placeholder="Category Name" class="box">
-        <input type="submit" name="add_category" value="Add Category" class="btn">
-    </form>
+    <section class="category-management">
+        <h4 class="heading">Manage Categories</h4>
+        <?php if (!empty($message)) : ?>
+            <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
+        <?php endif; ?>
 
-    <h2 class="heading">Existing Categories</h2>
-    <ul>
-        <?php while ($row = $categories->fetch_assoc()): ?>
-            <li>
-                <?php echo htmlspecialchars($row['Category']); ?>
-                <form action="" method="post" style="display:inline;">
-                    <input type="hidden" name="category_id" value="<?php echo $row['CategoryID']; ?>">
-                    <input type="submit" name="delete_category" value="Delete" class="btn btn-danger">
-                </form>
-            </li>
-        <?php endwhile; ?>
-    </ul>
-</section>
+        <form action="" method="post">
+            <h5>Add New Category</h5>
+            <input type="text" name="category_name" maxlength="100" required placeholder="Category Name" class="box">
+            <input type="submit" name="add_category" value="Add Category" class="btn">
+        </form>
+
+        <h2 class="heading">Existing Categories</h2>
+        <ul>
+            <?php while ($row = $categories->fetch_assoc()) : ?>
+                <li>
+                    <?php echo htmlspecialchars($row['Category']); ?>
+                    <form action="" method="post" style="display:inline;">
+                        <input type="hidden" name="category_id" value="<?php echo $row['CategoryID']; ?>">
+                        <input type="submit" name="delete_category" value="Delete" class="btn btn-danger">
+                    </form>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+    </section>
 
 </body>
+
 </html>

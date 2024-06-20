@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
 
     $check_like->close();
     $conn->close();
-    
+
     // Redirect to the same page to avoid form resubmission
     header("Location: #like");
     exit();

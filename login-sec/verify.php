@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION['info'] = "Email verified successfully.";
             $_SESSION['redirect'] = 'login.php';
-
         } else {
             // Check if the user is in the admins table
             $stmt = $conn->prepare("SELECT * FROM admins WHERE Email = ? AND Code = ?");
@@ -71,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Email Verification</title>
@@ -82,30 +82,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (confirm("<?php echo $_SESSION['info']; ?>")) {
                     window.location.href = "<?php echo $_SESSION['redirect']; ?>";
                 }
-                <?php unset($_SESSION['info']); unset($_SESSION['redirect']); ?>
+                <?php unset($_SESSION['info']);
+                unset($_SESSION['redirect']); ?>
             <?php } ?>
         });
     </script>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
                 <form method="post">
                     <h2 class="text-center">Code Verification</h2>
-                    <?php 
+                    <?php
                     if (isset($_SESSION['info']) && !isset($_SESSION['redirect'])) {
-                        ?>
+                    ?>
                         <div class="alert alert-success text-center">
                             <?php echo $_SESSION['info']; ?>
                         </div>
-                        <?php
+                    <?php
                         unset($_SESSION['info']);
                     }
                     ?>
                     <?php
                     if (count($errors) > 0) {
-                        ?>
+                    ?>
                         <div class="alert alert-danger text-center">
                             <?php
                             foreach ($errors as $showerror) {
@@ -113,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             }
                             ?>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <div class="form-group">
@@ -130,4 +132,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </body>
+
 </html>

@@ -99,19 +99,20 @@ $result = $select_activities_query->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Inactive Activities</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inactive Activities</title>
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="../css/admin_style.css">
-   <Style>
-            .back-button {
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../css/admin_style.css">
+    <Style>
+        .back-button {
             display: inline-block;
             width: 7rem;
             padding: 8px 10px;
@@ -131,71 +132,73 @@ $result = $select_activities_query->get_result();
     </Style>
 
 </head>
+
 <body>
 
-<?php require_once "../components/header.php"; ?>
+    <?php require_once "../components/header.php"; ?>
 
-<a href="super_admin.php" class="btn btn-secondary back-button">
+    <a href="super_admin.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
-<section class="show-posts">
+    <section class="show-posts">
 
-   <h1 class="heading">Inactive Activities</h1>
-   <?php if (!empty($message)): ?>
-        <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
-   <?php endif; ?>
+        <h1 class="heading">Inactive Activities</h1>
+        <?php if (!empty($message)) : ?>
+            <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
+        <?php endif; ?>
 
-   <div class="box-container">
+        <div class="box-container">
 
-   <?php 
-   if ($result->num_rows > 0) { ?>
-        <?php while ($fetch_activities = $result->fetch_assoc()) { 
-            // Convert time to 12-hour format with AM/PM
-            $activity_time = date("h:i A", strtotime($fetch_activities['Time']));
-        ?>
-            <form method="post" class="box">
-                <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>">
-                <input type="hidden" name="current_status" value="<?php echo htmlspecialchars($fetch_activities['Status']); ?>">
-                <div class="user">
-                    <div class="user-info">
-                        <span><?php echo htmlspecialchars($fetch_activities['Fname'] . ' ' . $fetch_activities['Lname']); ?></span>
-                        <div><?php echo htmlspecialchars($fetch_activities['Date'] ?? ''); ?></div>
-                    </div>
-                </div>
-                <?php if (!empty($fetch_activities['Image'])) { ?>
-                    <img src="../uploaded_media/<?php echo htmlspecialchars($fetch_activities['Image']); ?>" class="image" alt="">
+            <?php
+            if ($result->num_rows > 0) { ?>
+                <?php while ($fetch_activities = $result->fetch_assoc()) {
+                    // Convert time to 12-hour format with AM/PM
+                    $activity_time = date("h:i A", strtotime($fetch_activities['Time']));
+                ?>
+                    <form method="post" class="box">
+                        <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>">
+                        <input type="hidden" name="current_status" value="<?php echo htmlspecialchars($fetch_activities['Status']); ?>">
+                        <div class="user">
+                            <div class="user-info">
+                                <span><?php echo htmlspecialchars($fetch_activities['Fname'] . ' ' . $fetch_activities['Lname']); ?></span>
+                                <div><?php echo htmlspecialchars($fetch_activities['Date'] ?? ''); ?></div>
+                            </div>
+                        </div>
+                        <?php if (!empty($fetch_activities['Image'])) { ?>
+                            <img src="../uploaded_media/<?php echo htmlspecialchars($fetch_activities['Image']); ?>" class="image" alt="">
+                        <?php } ?>
+                        <div class="status" style="background-color: coral;">
+                            <?php echo htmlspecialchars($fetch_activities['Status']); ?>
+                        </div>
+                        <div class="title"><?php echo htmlspecialchars($fetch_activities['Title']); ?></div>
+                        <div class="posts-Content" style="font-size: 14px;"><?php echo htmlspecialchars($fetch_activities['Content']); ?></div>
+
+                        <div class="details" style="font-size: 12px;">
+                            <p><strong>Venue:</strong> <?php echo htmlspecialchars($fetch_activities['Venue']); ?></p>
+                            <p><strong>Address:</strong> <?php echo htmlspecialchars($fetch_activities['Address']); ?></p>
+                            <p><strong>Date:</strong> <?php echo htmlspecialchars($fetch_activities['Date']); ?></p>
+                            <p><strong>Time:</strong> <?php echo htmlspecialchars($activity_time); ?></p>
+                        </div>
+                        <div class="flex-btn">
+                            <a href="edit_activity.php?ActivityID=<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>" class="option-btn">Edit</a>
+                            <button type="submit" name="delete" class="delete-btn" onclick="return confirm('Delete this activity?');">Delete</button>
+                        </div>
+                        <button type="submit" name="update_status" class="option-btn"><?php echo ($fetch_activities['Status'] == 'Active') ? 'Deactivate' : 'Activate'; ?></button>
+                    </form>
                 <?php } ?>
-                <div class="status" style="background-color: coral;">
-                    <?php echo htmlspecialchars($fetch_activities['Status']); ?>
-                </div>
-                <div class="title"><?php echo htmlspecialchars($fetch_activities['Title']); ?></div>
-                <div class="posts-Content" style="font-size: 14px;"><?php echo htmlspecialchars($fetch_activities['Content']); ?></div>
+            <?php } else { ?>
+                <p class="empty">No inactive activities found!</p>
+            <?php } ?>
 
-                <div class="details" style="font-size: 12px;">
-                    <p><strong>Venue:</strong> <?php echo htmlspecialchars($fetch_activities['Venue']); ?></p>
-                    <p><strong>Address:</strong> <?php echo htmlspecialchars($fetch_activities['Address']); ?></p>
-                    <p><strong>Date:</strong> <?php echo htmlspecialchars($fetch_activities['Date']); ?></p>
-                    <p><strong>Time:</strong> <?php echo htmlspecialchars($activity_time); ?></p>
-                </div>
-                <div class="flex-btn">
-                    <a href="edit_activity.php?ActivityID=<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>" class="option-btn">Edit</a>
-                    <button type="submit" name="delete" class="delete-btn" onclick="return confirm('Delete this activity?');">Delete</button>
-                </div>
-                <button type="submit" name="update_status" class="option-btn"><?php echo ($fetch_activities['Status'] == 'Active') ? 'Deactivate' : 'Activate'; ?></button>
-            </form>
-        <?php } ?>
-    <?php } else { ?>
-        <p class="empty">No inactive activities found!</p>
-    <?php } ?>
+        </div>
+    </section>
 
-    </div>
-</section>
-
-<!-- custom js file link  -->
-<script src="../js/admin_script.js"></script>
+    <!-- custom js file link  -->
+    <script src="../js/admin_script.js"></script>
 
 </body>
+
 </html>
 
 <?php

@@ -1,241 +1,242 @@
 @font-face {
-    font-family: 'Poppins';
-    src: url(font/Poppins-Regular.ttf);
+  font-family: "Poppins";
+  src: url(font/Poppins-Regular.ttf);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    list-style: none;
-    text-decoration: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  text-decoration: none;
 }
-body{
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(360deg, #7D0A0A 12.39%, #671111 45.88%, #340909 100%);
-    margin-top: 10px;
-    margin-bottom: 10px;
+body {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+    360deg,
+    #7d0a0a 12.39%,
+    #671111 45.88%,
+    #340909 100%
+  );
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .backBtn {
-    display: flex;
-    margin-left: 8px;
-    margin-top: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    background: #fff;
-    width: 200px;
-    height: 40px;
-    padding: 7px;
-    justify-content: center;
-    text-align: center;
-    text-decoration: none;
-    color: #7D0A0A;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow:  0, 0, 10px rgba(0, 0, 0, 0.2);
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: box-shadow, transform;
-    transition-property: box-shadow, transform;
+  display: flex;
+  margin-left: 8px;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #fff;
+  width: 200px;
+  height: 40px;
+  padding: 7px;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: #7d0a0a;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0, 0, 10px rgba(0, 0, 0, 0.2);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
 }
 
-.backBtn:hover, .backBtn:focus, .backBtn:active {
-    box-shadow: 0, 0, 15px rgba(0, 0, 0, 0.5);
-    -webkit-transform: scale(1);
-    transform: scale(1.1);
-    color: #7D0A0A;
-    text-decoration: none;
+.backBtn:hover,
+.backBtn:focus,
+.backBtn:active {
+  box-shadow: 0, 0, 15px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1);
+  transform: scale(1.1);
+  color: #7d0a0a;
+  text-decoration: none;
 }
 
-.container{
-    margin-top: 70px;
-    max-width: 600px;
-    width: 100%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-    align-items: center;
-    justify-content: center;
-    margin-right: 30%;
-    height: 90%;
+.container {
+  margin-top: 70px;
+  max-width: 600px;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+  margin-right: 30%;
+  height: 90%;
 }
 
-.container h2{
-    font-size: 1.5rem;
-    color: #333;
-    font-weight: 500;
-    text-align: center;
+.container h2 {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
 }
 
-.container .form{
-    margin-top: 10px;
+.container .form {
+  margin-top: 10px;
 }
 
-.form .input-box{
-    width: 100%;
-    margin-top: 10px;
+.form .input-box {
+  width: 100%;
+  margin-top: 10px;
 }
 
-.input-box label{
-    color: #333;   
+.input-box label {
+  color: #333;
 }
 
-.form :where(.input-box input, .select-box){
-    position: relative;
-    height: 30px;
-    width: 100%;
-    outline: none;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 5px;
-    font-size: 1rem;
-    color: black;
-    margin-top: 3px;
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 30px;
+  width: 100%;
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 1rem;
+  color: black;
+  margin-top: 3px;
 }
 
-.form .select-box{
-    margin-top: 10px;
+.form .select-box {
+  margin-top: 10px;
 }
 
 .form .column {
-    display: flex;
-    column-gap: 15px;
+  display: flex;
+  column-gap: 15px;
 }
 
-.form .gender-box{
-    margin-top: 10px;
+.form .gender-box {
+  margin-top: 10px;
 }
 
-.gender-box h3{
-    color: #333;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 8px;
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.form :where(.gender-option, .gender){
-    display: flex;
-    align-items: center;
-    column-gap: 50px;
-    flex-wrap: wrap;
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
 }
-.form .gender{
-    column-gap: 10px;
-    cursor: pointer;
+.form .gender {
+  column-gap: 10px;
+  cursor: pointer;
 }
-.gender input{
-    accent-color: #7D0A0A;
-}
-
-.form :where(.gender input, .gender label){
-    cursor: pointer;
+.gender input {
+  accent-color: #7d0a0a;
 }
 
-.form .select-role select{
-        height: 40%;
-        width: 34vh;
-        outline: none;
-        border: none;
-        color: #707070;
-        font-size: 1rem;
-        margin-top: 2px;
-        position: relative;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 5px;
-    
-    }
-
-.select-box select{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    color: #707070;
-    font-size: 1rem;
-
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
 }
 
-.select-role label{
-    color: #333; 
-    margin-top: 10px;
+.form .select-role select {
+  height: 40%;
+  width: 34vh;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+  margin-top: 2px;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px;
 }
 
-
-.program :where(input, .select-box){
-    margin-top: 10px;
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
 }
 
-.input-box h3{
-    color: #333;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 2px;
+.select-role label {
+  color: #333;
+  margin-top: 10px;
 }
 
-.form .button{
-    padding: 5px;
-    height: 40px;
-    width: 100%;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 400;
-    background-color: #7D0A0A;
-    border-radius: 5px;
-    align-items: center;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.program :where(input, .select-box) {
+  margin-top: 10px;
+}
+
+.input-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.form .button {
+  padding: 5px;
+  height: 40px;
+  width: 100%;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 400;
+  background-color: #7d0a0a;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .form .button:hover {
-    background: #c72d2d;
+  background: #c72d2d;
 }
 
-.form .link{
-    text-align: center;
-    margin-top: 5px;
+.form .link {
+  text-align: center;
+  margin-top: 5px;
 }
 
-.form .link a{
-    color: #7D0A0A;
+.form .link a {
+  color: #7d0a0a;
 }
-
 
 @media screen and (max-width: 500px) {
-    .form .column {
-        flex-wrap: wrap;
-    }
-    .form :where(.gender-option, .gender) {
-        row-gap: 15px;
-    }
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
 }
 
-.form .profile{
-   font-size: 13px;
-   margin-left: 10px;
+.form .profile {
+  font-size: 13px;
+  margin-left: 10px;
 }
 
-.profile label{
-    margin-top: 10px;
-    font-size: 16px;
+.profile label {
+  margin-top: 10px;
+  font-size: 16px;
 }
 
-.profile input::-webkit-file-upload-button{
-    background-color: #7D0A0A;
-    color: white;
-    border-radius: 8px;
-    height: 30px;
+.profile input::-webkit-file-upload-button {
+  background-color: #7d0a0a;
+  color: white;
+  border-radius: 8px;
+  height: 30px;
 }
-.profile input::-webkit-file-upload-button:hover{
-    background-color: #c72d2d;
-    color: #fff;
-    border-radius: 8px;
+.profile input::-webkit-file-upload-button:hover {
+  background-color: #c72d2d;
+  color: #fff;
+  border-radius: 8px;
 }
-
-

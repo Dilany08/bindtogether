@@ -10,13 +10,13 @@ mysqli_begin_transaction($conn);
 
 try {
     // Delete from dependent tables first
-    $delete_reminders_query = "DELETE FROM `reminders` WHERE `EventID` = '".$EventID."'";
+    $delete_reminders_query = "DELETE FROM `reminders` WHERE `EventID` = '" . $EventID . "'";
     if (!mysqli_query($conn, $delete_reminders_query)) {
         throw new Exception('Failed to delete from reminders table');
     }
 
     // Then delete from main table
-    $delete_event_query = "DELETE FROM `calendar` WHERE `EventID` = '".$EventID."'";
+    $delete_event_query = "DELETE FROM `calendar` WHERE `EventID` = '" . $EventID . "'";
     if (!mysqli_query($conn, $delete_event_query)) {
         throw new Exception('Failed to delete event');
     }
