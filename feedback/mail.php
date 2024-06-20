@@ -5,7 +5,7 @@ require "../login-sec/connection.php";
 if (isset($_POST['send'])) {
     // Establish database connection
     $conn = getDBConnection();
-    
+
     // Sanitize user input using prepared statements
     $Email = $_POST['Email'] ?? '';
     $Subject = $_POST['Subject'] ?? '';
@@ -15,14 +15,14 @@ if (isset($_POST['send'])) {
     $Fname = $_SESSION['Fname'];
     $Lname = $_SESSION['Lname'];
     $Name = $Fname . ' ' . $Lname; // Concatenate Fname and Lname
-    
+
     // Retrieve user ID from the users table based on Email
     $query = "SELECT UserID FROM users WHERE Email = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $Email);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     // Check if user exists
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
@@ -67,4 +67,3 @@ if (isset($_POST['send'])) {
     $stmt->close();
     $conn->close();
 }
-

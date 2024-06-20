@@ -26,7 +26,7 @@ if ($stmt->execute()) {
     $subject = "Password Reset Code";
     $message = "Your password reset code is: $Code";
     $sender = "From: bpsu.bindtogether@gmail.com";
-    
+
     if (mail($Email, $subject, $message, $sender)) {
         $_SESSION['info'] = "We've sent a new password reset code to your email - $Email";
         header('Location: reset-Code.php');

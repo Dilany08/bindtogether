@@ -98,6 +98,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -129,77 +130,79 @@ $conn->close();
         }
     </style>
 </head>
-<body>
-<?php require_once "../components/header.php"; ?>
 
-<a href="super_admin.php" class="btn btn-secondary back-button">
+<body>
+    <?php require_once "../components/header.php"; ?>
+
+    <a href="posts.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
-<!-- add post -->
+    <!-- add post -->
 
-<section class="post-editor">
-    <h1 class="heading">Add New Post</h1>
-    <?php if (!empty($message)): ?>
-        <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
-    <?php endif; ?>
+    <section class="post-editor">
+        <h1 class="heading">Add New Post</h1>
+        <?php if (!empty($message)) : ?>
+            <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
+        <?php endif; ?>
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <p><input type="hidden" name="name" value="<?= htmlspecialchars($Fname . ' ' . $Lname); ?>"></p>
-        <p><input type="hidden" name="Date" value="<?= htmlspecialchars($Date); ?>"></p>
-        <p>Post Title <span>*</span></p>
-        <input type="text" name="Title" maxlength="100" required placeholder="Add post Title" class="box">
-        <p>Post Content <span>*</span></p>
-        <textarea name="Content" class="box" required maxlength="10000" placeholder="Write your Content..." cols="30" rows="10"></textarea>
-        <p>Post Category <span>*</span></p>
-        <select name="Category" class="box" required>
-            <option value="" selected disabled>--Select Category*--</option>
-            <?php while ($category = $categories_result->fetch_assoc()): ?>
-                <option value="<?php echo htmlspecialchars($category['Category']); ?>"><?php echo htmlspecialchars($category['Category']); ?></option>
-            <?php endwhile; ?>
-        </select>
-        <p>Media Type <span>*</span></p>
-        <select name="MediaType" class="box" required>
-            <option value="" selected disabled>--Select Media Type*--</option>
-            <option value="text">Text</option>
-            <option value="image">Image</option>
-            <option value="video">Video</option>
-        </select>
-        <div id="mediaField">
-            <p>Media Content</p>
-            <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp, video/mp4, video/webm, video/ogg, video/quicktime, video/mov">
-        </div>
-        <div class="flex-btn">
-            <input type="submit" value="Publish Post" name="publish" class="btn">
-            <input type="submit" value="Save Draft" name="draft" class="option-btn">
-        </div>
-    </form>
-    <?php
-    if (isset($messages)) {
-        foreach ($messages as $msg) {
-            echo '<div class="message">' . htmlspecialchars($msg) . '</div>';
+        <form action="" method="post" enctype="multipart/form-data">
+            <p><input type="hidden" name="name" value="<?= htmlspecialchars($Fname . ' ' . $Lname); ?>"></p>
+            <p><input type="hidden" name="Date" value="<?= htmlspecialchars($Date); ?>"></p>
+            <p>Post Title <span>*</span></p>
+            <input type="text" name="Title" maxlength="100" required placeholder="Add post Title" class="box">
+            <p>Post Content <span>*</span></p>
+            <textarea name="Content" class="box" required maxlength="10000" placeholder="Write your Content..." cols="30" rows="10"></textarea>
+            <p>Post Category <span>*</span></p>
+            <select name="Category" class="box" required>
+                <option value="" selected disabled>--Select Category*--</option>
+                <?php while ($category = $categories_result->fetch_assoc()) : ?>
+                    <option value="<?php echo htmlspecialchars($category['Category']); ?>"><?php echo htmlspecialchars($category['Category']); ?></option>
+                <?php endwhile; ?>
+            </select>
+            <p>Media Type <span>*</span></p>
+            <select name="MediaType" class="box" required>
+                <option value="" selected disabled>--Select Media Type*--</option>
+                <option value="text">Text</option>
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+            </select>
+            <div id="mediaField">
+                <p>Media Content</p>
+                <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp, video/mp4, video/webm, video/ogg, video/quicktime, video/mov">
+            </div>
+            <div class="flex-btn">
+                <input type="submit" value="Publish Post" name="publish" class="btn">
+                <input type="submit" value="Save Draft" name="draft" class="option-btn">
+            </div>
+        </form>
+        <?php
+        if (isset($messages)) {
+            foreach ($messages as $msg) {
+                echo '<div class="message">' . htmlspecialchars($msg) . '</div>';
+            }
         }
-    }
-    ?>
-</section>
+        ?>
+    </section>
 
-<!-- custom js file link  -->
-<script src="../js/admin_script.js"></script>
+    <!-- custom js file link  -->
+    <script src="../js/admin_script.js"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const MediaTypeSelect = document.querySelector('select[name="MediaType"]');
-    const mediaField = document.getElementById('mediaField');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const MediaTypeSelect = document.querySelector('select[name="MediaType"]');
+            const mediaField = document.getElementById('mediaField');
 
-    MediaTypeSelect.addEventListener('change', function () {
-        if (this.value === 'text') {
-            mediaField.innerHTML = '<textarea name="mediaText" class="box" required placeholder="Enter text Content..." cols="30" rows="10"></textarea>';
-        } else {
-            mediaField.innerHTML = '<input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp, video/mp4, video/webm">';
-        }
-    });
-});
-</script>
+            MediaTypeSelect.addEventListener('change', function() {
+                if (this.value === 'text') {
+                    mediaField.innerHTML = '<textarea name="mediaText" class="box" required placeholder="Enter text Content..." cols="30" rows="10"></textarea>';
+                } else {
+                    mediaField.innerHTML = '<input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp, video/mp4, video/webm">';
+                }
+            });
+        });
+    </script>
 
 </body>
+
 </html>

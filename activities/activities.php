@@ -13,6 +13,7 @@ $Avatar_header = $_SESSION['Avatar'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +22,10 @@ $Avatar_header = $_SESSION['Avatar'];
     <link rel="stylesheet" type="text/css" href="../css/activities.css">
     <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
     <style>
-        .btn{
+        .btn {
             margin-left: 5px;
         }
+
         .back-button {
             display: inline-block;
             width: 5rem;
@@ -43,56 +45,56 @@ $Avatar_header = $_SESSION['Avatar'];
         }
     </style>
 </head>
-<body>
-<?php require_once "../components/user_header.php"; ?>
 
- <!-- Back button -->
- <a href="../pages/frontpage.php" class="btn btn-secondary back-button">
+<body>
+    <?php require_once "../components/user_header.php"; ?>
+
+    <!-- Back button -->
+    <a href="../pages/frontpage.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
-<div class="container-one">
-    <h1>Join Activities</h1>
-    <div class="grid">
-        <?php
-        $categories = [
-            'Sports' => 'sports.php',
-            'Performers and Artists' => 'performers.php',
-            'Upcoming Events' => 'upcoming_events.php',
-        ];
+    <div class="container-one">
+        <h1>Join Activities</h1>
+        <div class="grid">
+            <?php
+            $categories = [
+                'Sports' => 'sports.php',
+                'Performers and Artists' => 'performers.php',
+            ];
 
-        $images = [
-            'Sports' => '../img/runners.jpeg',
-            'Performers and Artists' => '../img/performers.jpeg',
-            'Upcoming Events' => '../img/events.jpeg',
-        ];
+            $images = [
+                'Sports' => '../img/runners.jpeg',
+                'Performers and Artists' => '../img/performers.jpeg',
+            ];
 
-        foreach ($categories as $category => $file): ?>
-            <div class="card-activity">
-                <a href="<?php echo htmlspecialchars($file); ?>">
-                    <div class="card-content">
-                        <img src="<?php echo htmlspecialchars($images[$category]); ?>" alt="<?php echo htmlspecialchars($category); ?>">
-                        <h2><?php echo htmlspecialchars($category); ?></h2>
-                        <p>Click to view and join <?php echo htmlspecialchars($category); ?> events.</p>
-                    </div>
-                </a>
-            </div>
-        <?php endforeach; ?>
+            foreach ($categories as $category => $file) : ?>
+                <div class="card-activity">
+                    <a href="<?php echo htmlspecialchars($file); ?>">
+                        <div class="card-content">
+                            <img src="<?php echo htmlspecialchars($images[$category]); ?>" alt="<?php echo htmlspecialchars($category); ?>">
+                            <h2><?php echo htmlspecialchars($category); ?></h2>
+                            <p>Click to view and join <?php echo htmlspecialchars($category); ?> events.</p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
 
-<script>
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mouseover', () => {
-        card.style.transform = 'scale(1.05)';
-    });
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.style.transform = 'scale(1.05)';
+            });
 
-    card.addEventListener('mouseout', () => {
-        card.style.transform = 'scale(1)';
-    });
-});
-</script>
+            card.addEventListener('mouseout', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 
-<script src="../js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>

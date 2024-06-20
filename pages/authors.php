@@ -36,6 +36,7 @@ if (isset($_GET['AdminID'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,9 +44,10 @@ if (isset($_GET['AdminID'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
     <style>
-        .btn{
+        .btn {
             margin-left: 5px;
         }
+
         .back-button {
             display: inline-block;
             width: 5rem;
@@ -65,10 +67,11 @@ if (isset($_GET['AdminID'])) {
         }
     </style>
 </head>
+
 <body>
     <?php require_once "../components/user_header.php" ?>
-     <!-- Back button -->
-     <a href="frontpage.php" class="btn btn-secondary back-button">
+    <!-- Back button -->
+    <a href="frontpage.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
@@ -84,7 +87,7 @@ if (isset($_GET['AdminID'])) {
             $select_author = $conn->query("SELECT DISTINCT admins.* FROM admins JOIN posts ON admins.AdminID = posts.AdminID");
 
             if ($select_author->num_rows > 0) {
-                while ($fetch_authors = $select_author->fetch_assoc()) { 
+                while ($fetch_authors = $select_author->fetch_assoc()) {
 
                     // Count active posts by author
                     $count_admin_posts = $conn->prepare("SELECT * FROM `posts` WHERE AdminID = ? AND Status = ?");
@@ -115,13 +118,13 @@ if (isset($_GET['AdminID'])) {
                     $count_admin_comments->fetch();
                     $count_admin_comments->close();
             ?>
-            <div class="box">
-                <p>author : <span><?= htmlspecialchars($fetch_authors['Fname']. ' ' .$fetch_authors['Lname']); ?></span></p>
-                <p>total posts : <span><?= $total_admin_posts; ?></span></p>
-                <p>posts likes : <span><?= $total_admin_likes; ?></span></p>
-                <p>posts comments : <span><?= $total_admin_comments; ?></span></p>
-                <a href="admin_posts.php?AdminID=<?= htmlspecialchars($fetch_authors['Fname']. ' ' .$fetch_authors['Lname']); ?>" class="btn">view posts</a>
-            </div>
+                    <div class="box">
+                        <p>author : <span><?= htmlspecialchars($fetch_authors['Fname'] . ' ' . $fetch_authors['Lname']); ?></span></p>
+                        <p>total posts : <span><?= $total_admin_posts; ?></span></p>
+                        <p>posts likes : <span><?= $total_admin_likes; ?></span></p>
+                        <p>posts comments : <span><?= $total_admin_comments; ?></span></p>
+                        <a href="admin_posts.php?AdminID=<?= htmlspecialchars($fetch_authors['Fname'] . ' ' . $fetch_authors['Lname']); ?>" class="btn">view posts</a>
+                    </div>
             <?php
                 }
             } else {
@@ -130,11 +133,12 @@ if (isset($_GET['AdminID'])) {
             ?>
 
         </div>
-        
+
     </section>
 
     <!-- custom js file link  -->
     <script src="../js/script.js"></script>
 
 </body>
+
 </html>

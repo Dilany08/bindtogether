@@ -78,17 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Author</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-   <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
-   <style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/frontpage.css">
+    <style>
         .btn {
             margin-left: 5px;
         }
+
         .back-button {
             display: inline-block;
             width: 5rem;
@@ -98,18 +100,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
             cursor: pointer;
             text-align: left;
         }
+
         .back-button i {
             margin-right: 3px;
         }
+
         .back-button:hover {
             background-color: #c72d2d;
         }
     </style>
 </head>
+
 <body>
     <?php require_once "../components/user_header.php"; ?>
-     <!-- Back button -->
-     <a href="frontpage.php" class="btn btn-secondary back-button">
+    <!-- Back button -->
+    <a href="frontpage.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
@@ -175,18 +180,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
                             if (!empty($fetch_posts['MediaURL'])) {
                                 if ($fetch_posts['MediaType'] == 'image') {
                             ?>
-                            <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
-                            <?php
+                                    <img src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" class="post-image" alt="">
+                                <?php
                                 } elseif ($fetch_posts['MediaType'] == 'video') {
-                            ?>
-                            <video controls class="post-image">
-                                <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
-                                <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
-                                <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
-                                <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
-                                <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
-                                Your browser does not support the video tag.
-                            </video>
+                                ?>
+                                    <video controls class="post-image">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mp4">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/webm">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/ogg">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/quicktime">
+                                        <source src="../uploaded_media/<?= htmlspecialchars($fetch_posts['MediaURL']); ?>" type="video/mov">
+                                        Your browser does not support the video tag.
+                                    </video>
                             <?php
                                 }
                             }
@@ -221,8 +226,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post'])) {
         </div>
     </section>
 
-<!-- custom js file link  -->
-<script src="../js/script.js"></script>
+    <!-- custom js file link  -->
+    <script src="../js/script.js"></script>
 
 </body>
+
 </html>

@@ -1,254 +1,254 @@
 @font-face {
-    font-family: 'Poppins';
-    src: url(font/Poppins-Regular.ttf);
+  font-family: "Poppins";
+  src: url(font/Poppins-Regular.ttf);
 }
 @font-face {
-    font-family: 'CaveatBrush';
-    src: url(font/CaveatBrush-Regular.ttf);
+  font-family: "CaveatBrush";
+  src: url(font/CaveatBrush-Regular.ttf);
 }
 @font-face {
-    font-family: 'PermanentMarker';
-    src: url(font/PermanentMarker-Regular.ttf);
-}
-   
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    list-style: none;
-    text-decoration: none;
+  font-family: "PermanentMarker";
+  src: url(font/PermanentMarker-Regular.ttf);
 }
 
-header{
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    padding-top: 10px;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  text-decoration: none;
 }
 
-img.Group{
-    height: 70px;
-    width: 100px;
-    object-fit: contain;
+header {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
-.logo{
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    text-transform: uppercase;
-    text-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+img.Group {
+  height: 70px;
+  width: 100px;
+  object-fit: contain;
 }
 
-.navlist{
-    display: flex;
-    margin-left: 430px;
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
 
-.navlist a{
-    color: white;
-    font-size: 15px;
-    margin-left: 75px;
-    padding: 10px 13px;
-    border-radius: 3px;
-    font-weight: 530;
-    text-transform: uppercase;
-    text-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+.navlist {
+  display: flex;
+  margin-left: 430px;
+}
+
+.navlist a {
+  color: white;
+  font-size: 15px;
+  margin-left: 75px;
+  padding: 10px 13px;
+  border-radius: 3px;
+  font-weight: 530;
+  text-transform: uppercase;
+  text-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .navlist a:hover {
-    background: white;
-    transition: .5s;
-    color: #7D0A0A;
-    text-decoration: none;
-    font-weight: 500;
+  background: white;
+  transition: 0.5s;
+  color: #7d0a0a;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-#menu-icon{
-    color: white;
-    font-size: 30px;
-    z-index: 10001;
-    cursor: pointer;
-    display: none;
-    
+#menu-icon {
+  color: white;
+  font-size: 30px;
+  z-index: 10001;
+  cursor: pointer;
+  display: none;
 }
 
-.description{
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(360deg, #7D0A0A 12.39%, #671111 45.88%, #340909 100%);
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    gap: 2rem;
-
-}   
-    
-section{
-    padding: 0 10%;
+.description {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+    360deg,
+    #7d0a0a 12.39%,
+    #671111 45.88%,
+    #340909 100%
+  );
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 2rem;
 }
 
-.content h1{
-    font-family: 'PermanentMarker', cursive;
-    font-size: 50px;
-    line-height: 1;
-    color: white;
-    margin: 0 0 45px;
-    text-align: center;
+section {
+  padding: 0 10%;
 }
 
-.content p{
-    color: white;
-    font-size: 35px;
-    line-height: 1.5;
-    margin-bottom: 40px;
-    text-align: center;
+.content h1 {
+  font-family: "PermanentMarker", cursive;
+  font-size: 50px;
+  line-height: 1;
+  color: white;
+  margin: 0 0 45px;
+  text-align: center;
 }
 
-.bpsu-img img{
-    margin-left: 70px;
-    width: 550px;
-    height: auto;
+.content p {
+  color: white;
+  font-size: 35px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-.content a{
-    display: inline-block;
-    color: white;
-    background: #b24c4c;
-    border: 1px solid transparent;
-    padding: 10px 35px;
-    line-height: 1.4;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 30px;
-    text-transform: uppercase;
-    transition: all .55s ease;
-    margin-left: 150px;
-    
+.bpsu-img img {
+  margin-left: 70px;
+  width: 550px;
+  height: auto;
 }
 
-.content a:hover{
-    background-color: transparent;
-    border: 2px solid white;
-    transform: translateX(5px);
+.content a {
+  display: inline-block;
+  color: white;
+  background: #b24c4c;
+  border: 1px solid transparent;
+  padding: 10px 35px;
+  line-height: 1.4;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 30px;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  margin-left: 150px;
 }
 
-.content a.signup{
-    background: transparent;
-    border: 2px solid white;
-    margin-left: 20px;
+.content a:hover {
+  background-color: transparent;
+  border: 2px solid white;
+  transform: translateX(5px);
+}
+
+.content a.signup {
+  background: transparent;
+  border: 2px solid white;
+  margin-left: 20px;
 }
 
 .scroll-down {
-    position: absolute;
-    bottom: 6%;
-    right: 9%;
+  position: absolute;
+  bottom: 6%;
+  right: 9%;
 }
 
-.scroll-down i{
-    display: block;
-    padding: 12px;
-    font-size: 25px;
-    color: white;
-    background: #c13939;
-    border-radius: 30px;
-    transition: all .50s ease;
+.scroll-down i {
+  display: block;
+  padding: 12px;
+  font-size: 25px;
+  color: white;
+  background: #c13939;
+  border-radius: 30px;
+  transition: all 0.5s ease;
 }
 
-.scroll-down i:hover{
-    transform: translateY(-5px);
-
+.scroll-down i:hover {
+  transform: translateY(-5px);
 }
 
 @media (max-width: 1496px) {
-    header{
-        padding: 15px 3%;
-        transition: .2s;
-    }
-    .scroll-down{
-        right: 3%;
-        transition: .2s;
-    }
+  header {
+    padding: 15px 3%;
+    transition: 0.2s;
+  }
+  .scroll-down {
+    right: 3%;
+    transition: 0.2s;
+  }
 }
 
-@media (max-width: 1382px){
-    section{
-        padding: 0 12%;
-        transition: .2s;
-    }
+@media (max-width: 1382px) {
+  section {
+    padding: 0 12%;
+    transition: 0.2s;
+  }
 }
 
-@media (max-width: 1191px){
-    .bpsu-img img{
-        width: 100%;
-        height: auto;
-    }
-    .content h1{
-        font-size: 40px;
-        margin: 0 0 30px;
-    }
+@media (max-width: 1191px) {
+  .bpsu-img img {
+    width: 100%;
+    height: auto;
+  }
+  .content h1 {
+    font-size: 40px;
+    margin: 0 0 30px;
+  }
 }
 
-@media (max-width: 1115px){
-    section{
-        padding: 0 3%;
-        transition: .2s;
-    }
-    .content{
-        padding-top: 115px;
-    }
-    .bpsu-img{
-        text-align: center;
-    }
-    .bpsu-img img{
-        width: 450px;
-        height: auto;
-    }
-    .description{
-        height: 100%;
-        gap: 1rem;
-        grid-template-columns: 1fr;
-    }
+@media (max-width: 1115px) {
+  section {
+    padding: 0 3%;
+    transition: 0.2s;
+  }
+  .content {
+    padding-top: 115px;
+  }
+  .bpsu-img {
+    text-align: center;
+  }
+  .bpsu-img img {
+    width: 450px;
+    height: auto;
+  }
+  .description {
+    height: 100%;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
 }
 
-@media (max-width: 1040px){
-    #menu-icon{
-        display: block;
-    }
-    .navlist{
-        position: absolute;
-        top: 100%;
-        right: -100%;
-        width: 250px;
-        height: 40vh;
-        background: #cd4242;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 25px 20px;
-    }
-    .navlist a{
-        display: block;
-        margin: 1px 0;
-        margin-left: 0;
-    }
-    .navlist.open{
-        right: 0;
-    }
+@media (max-width: 1040px) {
+  #menu-icon {
+    display: block;
+  }
+  .navlist {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    width: 250px;
+    height: 40vh;
+    background: #cd4242;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px 20px;
+  }
+  .navlist a {
+    display: block;
+    margin: 1px 0;
+    margin-left: 0;
+  }
+  .navlist.open {
+    right: 0;
+  }
 }
 
-@media (max-width: 542px){
-    .bpsu-img img{
-        width: 100%;
-        height: auto;
-    }
+@media (max-width: 542px) {
+  .bpsu-img img {
+    width: 100%;
+    height: auto;
+  }
 }

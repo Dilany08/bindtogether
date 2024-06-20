@@ -9,7 +9,7 @@ $conn = getDBConnection();
 
 $insert_query = "INSERT INTO `reminders`(`EventID`, `Email`) VALUES ('$EventID', '$Email')";
 
-if(mysqli_query($conn, $insert_query)) {
+if (mysqli_query($conn, $insert_query)) {
     $data = array('status' => true, 'msg' => 'Reminder set successfully!');
 } else {
     $data = array('status' => false, 'msg' => 'Sorry, Reminder not set. Check your details');
@@ -17,4 +17,3 @@ if(mysqli_query($conn, $insert_query)) {
 
 echo json_encode($data);
 $conn->close();
-?>

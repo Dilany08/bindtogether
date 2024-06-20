@@ -132,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -140,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="../css/admin_style.css">
     <Style>
-            .back-button {
+        .back-button {
             display: inline-block;
             width: 7rem;
             padding: 8px 10px;
@@ -159,95 +160,97 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </Style>
 </head>
+
 <body>
 
-<?php require_once "../components/header.php"; ?>
+    <?php require_once "../components/header.php"; ?>
 
-<a href="view_posts.php" class="btn btn-secondary back-button">
+    <a href="view_posts.php" class="btn btn-secondary back-button">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
-<section class="post-editor">
-    <h1 class="heading">Edit Activity</h1>
+    <section class="post-editor">
+        <h1 class="heading">Edit Activity</h1>
 
-    <?php
-    $conn = getDBConnection();
+        <?php
+        $conn = getDBConnection();
 
-    if (isset($_GET['ActivityID'])) {
-        $ActivityID = $_GET['ActivityID'];
-        $select_activities = $conn->prepare("SELECT * FROM activities WHERE ActivityID = ?");
-        $select_activities->bind_param("i", $ActivityID);
-        $select_activities->execute();
-        $result = $select_activities->get_result();
+        if (isset($_GET['ActivityID'])) {
+            $ActivityID = $_GET['ActivityID'];
+            $select_activities = $conn->prepare("SELECT * FROM activities WHERE ActivityID = ?");
+            $select_activities->bind_param("i", $ActivityID);
+            $select_activities->execute();
+            $result = $select_activities->get_result();
 
-        if ($result->num_rows > 0) {
-            while ($fetch_activities = $result->fetch_assoc()) {
-    ?>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="old_Image" value="<?php echo htmlspecialchars($fetch_activities['Image']); ?>">
-        <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>">
-        <?php if (!empty($message)): ?>
-      <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
-   <?php endif; ?>
-        <p>Activity Status <span>*</span></p>
-        <select name="Status" class="box" required>
-            <option value="<?php echo htmlspecialchars($fetch_activities['Status']); ?>" selected><?php echo htmlspecialchars($fetch_activities['Status']); ?></option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-        </select>
-        <p>Activity Title <span>*</span></p>
-        <input type="text" name="Title" maxlength="100" required placeholder="Add activity Title" class="box" value="<?php echo htmlspecialchars($fetch_activities['Title']); ?>">
-        <p>Activity Content <span>*</span></p>
-        <textarea name="Content" class="box" required maxlength="10000" placeholder="Write your Content..." cols="30" rows="10"><?php echo htmlspecialchars($fetch_activities['Content']); ?></textarea>
-        <p>Activity Category <span>*</span></p>
-        <select name="Category" class="box" required>
-            <option value="<?php echo htmlspecialchars($fetch_activities['Category']); ?>" selected><?php echo htmlspecialchars($fetch_activities['Category']); ?></option>
-            <option value="Sports">Sports</option>
-            <option value="Performers and Artists">Performers and Artists</option>
-            <option value="Upcoming Events">Upcoming Events</option>
-            <option value="Competitions">Competitions</option>
-            <option value="Practices">Practices</option>
-            <option value="Auditions">Auditions</option>
-        </select>
-        <p>Venue <span>*</span></p>
-        <input type="text" name="Venue" maxlength="255" required placeholder="Add event venue" class="box" value="<?php echo htmlspecialchars($fetch_activities['Venue']); ?>">
-        <p>Address <span>*</span></p>
-        <input type="text" name="Address" maxlength="255" required placeholder="Add event address" class="box" value="<?php echo htmlspecialchars($fetch_activities['Address']); ?>">
-        <p>Date <span>*</span></p>
-        <input type="date" name="Date" required class="box" value="<?php echo htmlspecialchars($fetch_activities['Date']); ?>">
-        <p>Time <span>*</span></p>
-        <input type="time" name="Time" required class="box" value="<?php echo htmlspecialchars($fetch_activities['Time']); ?>">
-        <p>Media</p>
-        <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp">
-        <?php if ($fetch_activities['Image'] != '') { ?>
-            <p>Current Media:</p>
-            <img src="../activityPictures/<?php echo htmlspecialchars($fetch_activities['Image']); ?>" class="image" alt="">
-            <input type="submit" value="Delete Media" class="inline-delete-btn" name="delete_media">
-        <?php } ?>
-        <div class="flex-btn">
-            <input type="submit" value="Save Activity" name="save" class="btn">
-            <a href="view_activity.php" class="option-btn">Go Back</a>
-            <input type="submit" value="Delete Activity" class="delete-btn" name="delete_activity">
-        </div>
-    </form>
-    <?php
+            if ($result->num_rows > 0) {
+                while ($fetch_activities = $result->fetch_assoc()) {
+        ?>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="old_Image" value="<?php echo htmlspecialchars($fetch_activities['Image']); ?>">
+                        <input type="hidden" name="ActivityID" value="<?php echo htmlspecialchars($fetch_activities['ActivityID']); ?>">
+                        <?php if (!empty($message)) : ?>
+                            <div class="alert <?php echo $message_class; ?>"><?php echo $message; ?></div>
+                        <?php endif; ?>
+                        <p>Activity Status <span>*</span></p>
+                        <select name="Status" class="box" required>
+                            <option value="<?php echo htmlspecialchars($fetch_activities['Status']); ?>" selected><?php echo htmlspecialchars($fetch_activities['Status']); ?></option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                        <p>Activity Title <span>*</span></p>
+                        <input type="text" name="Title" maxlength="100" required placeholder="Add activity Title" class="box" value="<?php echo htmlspecialchars($fetch_activities['Title']); ?>">
+                        <p>Activity Content <span>*</span></p>
+                        <textarea name="Content" class="box" required maxlength="10000" placeholder="Write your Content..." cols="30" rows="10"><?php echo htmlspecialchars($fetch_activities['Content']); ?></textarea>
+                        <p>Activity Category <span>*</span></p>
+                        <select name="Category" class="box" required>
+                            <option value="<?php echo htmlspecialchars($fetch_activities['Category']); ?>" selected><?php echo htmlspecialchars($fetch_activities['Category']); ?></option>
+                            <option value="Sports">Sports</option>
+                            <option value="Performers and Artists">Performers and Artists</option>
+                            <option value="Upcoming Events">Upcoming Events</option>
+                            <option value="Competitions">Competitions</option>
+                            <option value="Practices">Practices</option>
+                            <option value="Auditions">Auditions</option>
+                        </select>
+                        <p>Venue <span>*</span></p>
+                        <input type="text" name="Venue" maxlength="255" required placeholder="Add event venue" class="box" value="<?php echo htmlspecialchars($fetch_activities['Venue']); ?>">
+                        <p>Address <span>*</span></p>
+                        <input type="text" name="Address" maxlength="255" required placeholder="Add event address" class="box" value="<?php echo htmlspecialchars($fetch_activities['Address']); ?>">
+                        <p>Date <span>*</span></p>
+                        <input type="date" name="Date" required class="box" value="<?php echo htmlspecialchars($fetch_activities['Date']); ?>">
+                        <p>Time <span>*</span></p>
+                        <input type="time" name="Time" required class="box" value="<?php echo htmlspecialchars($fetch_activities['Time']); ?>">
+                        <p>Media</p>
+                        <input type="file" name="media" class="box" accept="image/jpg, image/jpeg, image/png, image/webp">
+                        <?php if ($fetch_activities['Image'] != '') { ?>
+                            <p>Current Media:</p>
+                            <img src="../activityPictures/<?php echo htmlspecialchars($fetch_activities['Image']); ?>" class="image" alt="">
+                            <input type="submit" value="Delete Media" class="inline-delete-btn" name="delete_media">
+                        <?php } ?>
+                        <div class="flex-btn">
+                            <input type="submit" value="Save Activity" name="save" class="btn">
+                            <a href="view_activity.php" class="option-btn">Go Back</a>
+                            <input type="submit" value="Delete Activity" class="delete-btn" name="delete_activity">
+                        </div>
+                    </form>
+                <?php
+                }
+            } else {
+                echo '<p class="empty">No activities found!</p>';
+                ?>
+                <div class="flex-btn">
+                    <a href="view_activities.php" class="option-btn">View Activities</a>
+                    <a href="add_activity.php" class="option-btn">Add Activity</a>
+                </div>
+        <?php
             }
-        } else {
-            echo '<p class="empty">No activities found!</p>';
-    ?>
-    <div class="flex-btn">
-        <a href="view_activities.php" class="option-btn">View Activities</a>
-        <a href="add_activity.php" class="option-btn">Add Activity</a>
-    </div>
-    <?php
+            $select_activities->close();
         }
-        $select_activities->close();
-    }
-    $conn->close();
-    ?>
-</section>
+        $conn->close();
+        ?>
+    </section>
 
-<script src="../js/admin_script.js"></script>
+    <script src="../js/admin_script.js"></script>
 
 </body>
+
 </html>
