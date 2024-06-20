@@ -4,7 +4,7 @@ function getDBConnection()
 {
 
     $servername = "b2iaftd53m7qfeckgdcd-mysql.services.clever-cloud.com";
-    $username = "ukmjtrrlicvc78dw";
+    $username = "ukmjtrrlicvc78dw@91.208.207.33";
     $password = "9Q2W9VCnKUc60s9eYzr6";
     $dbname = "b2iaftd53m7qfeckgdcd";
 
