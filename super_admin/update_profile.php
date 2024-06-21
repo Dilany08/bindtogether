@@ -145,17 +145,40 @@ if (isset($_POST['submit'])) {
     <!-- Custom CSS file link  -->
     <link rel="stylesheet" href="../css/admin_style.css">
     <Style>
-        form>div {
+
+        /*form > div {
             display: flex;
             justify-content: space-between;
-        }
-
-        form>div>.btn {
+        }*/
+        form > div > .btn {
             margin-left: 0;
-            width: 48%;
+            /*width: 48%;*/
+        }
+        /* make two buttons appear next to eachother */
+
+        .changePass {
+            background-color: unset !important;
+            color: var(--main-color) !important;
+            text-decoration: underline;
         }
 
-        /* make two buttons appear next to eachother */
+        input::-webkit-file-upload-button {
+            background-color: #7d0a0a;
+            color: white;
+            border-radius: 8px;
+            height: 30px;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        input::-webkit-file-upload-button:hover {
+            background-color: #c72d2d;
+            color: #fff;
+            border-radius: 8px;
+            border: none;
+            font-family: inherit;
+        }
+
         .back-button {
             display: inline-block;
             width: 7rem;
@@ -203,8 +226,8 @@ if (isset($_POST['submit'])) {
             <p style="text-align:left">New Profile Picture:</p>
             <input type="file" name="avatar" class="box">
             <div>
-                <input type="button" value="Change Password" class="btn" onclick="window.open('changePassword.php', '_self')">
                 <input type="submit" value="Update Now" name="submit" class="btn">
+                <input type="button" value="Change Password" class="btn changePass" onclick="window.open('changePassword.php', '_self')">
             </div>
         </form>
 
