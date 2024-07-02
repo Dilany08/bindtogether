@@ -234,9 +234,14 @@ body {
   color: white;
   border-radius: 8px;
   height: 30px;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 .profile input::-webkit-file-upload-button:hover {
   background-color: #c72d2d;
   color: #fff;
   border-radius: 8px;
+  border: none;
+  font-family: inherit;
 }

@@ -36,7 +36,7 @@ $Avatar_header = $_SESSION['Avatar'];
             <li class="profile-dropdown-list-item">
                 <a href="../pages/update.php">
                     <i class="fa-regular fa-user"></i>
-                    Profile
+                    Update Profile
                 </a>
             </li>
             <li class="profile-dropdown-list-item">
